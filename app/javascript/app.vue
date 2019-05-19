@@ -1,24 +1,23 @@
 <template>
   <div class="noticekeeper">
+    <cases-view />
   </div>
 </template>
 
 <script>
-  import { mapGetters, mapMutations, mapState } from 'vuex'
+import CasesView from './packs/components/cases_view.vue'
 
-  export default {
-    components: { 
-      },
+import { mapGetters, mapMutations, mapState } from "vuex";
 
-      computed: {
-      },
+export default {
+  components: {
+    'cases-view': CasesView
+  },
 
-      methods: {
-      },
+  computed: {},
 
-      mounted() {        
-      }
-  }
+  methods: {},
+
+  mounted() {}
+};
 </script>
-
-

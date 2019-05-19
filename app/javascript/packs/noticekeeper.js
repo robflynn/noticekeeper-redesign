@@ -1,6 +1,6 @@
 import Mock from '../mock'
 
-class Noticekeeper {  
+class Noticekeeper {
 }
 
 export default Noticekeeper
