@@ -1,0 +1,16 @@
+$padding: 5px;
+
+$colors: (
+  sidebar: #2B3940,
+  badge: rgba(255, 0, 0, 0.8),
+);
+
+@function color($key) {
+  @if map-has-key($colors, $key) {
+    @return map-get($colors, $key);
+  }
+
+  @warn "Unknown `#{$key}` in $colors.";
+
+  @return null;
+}
