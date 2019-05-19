@@ -16,7 +16,7 @@
         </thead>
 
         <tbody>
-          <tr v-for="(court_case, index) in court_cases" :key="court_case.id" :data-case-id="court_case.id">
+          <tr v-for="court_case in court_cases" :key="court_case.id" :data-case-id="court_case.id" @click="courtCaseSelected($event, court_case)">
             <td></td>
             <td></td>
             <td>{{ court_case.name }}</td>
@@ -142,8 +142,19 @@
   import Mock from '../../mock'
 
   export default {
-    props: {},
-    methods: {},
+    props: {
+      courtCaseClicked: {
+        required: false,
+        type: Function
+      }
+    },
+    methods: {
+      courtCaseSelected(evt, court_case) {
+        if (this.courtCaseClicked) {
+          this.courtCaseClicked(court_case)
+        }
+      }
+    },
     computed: {
       ...mapState([
         'court_cases'

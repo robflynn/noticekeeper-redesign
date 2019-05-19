@@ -1,6 +1,6 @@
 <template>
   <div class="noticekeeper">
-    <cases-view />
+    <cases-view :courtCaseClicked="didSelectCourtCase" />
   </div>
 </template>
 
@@ -16,8 +16,13 @@ export default {
 
   computed: {},
 
-  methods: {},
+  methods: {
+    didSelectCourtCase: (court_case) => {
+      console.log(court_case)
+    }    
+  },
 
-  mounted() {}
+  mounted() {},
+
 };
 </script>
