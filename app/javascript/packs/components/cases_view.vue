@@ -149,12 +149,23 @@
       }
     },
     methods: {
+      setCourtCases(court_cases) {
+        this.court_cases = court_cases
+      },
+
       courtCaseSelected(evt, court_case) {
         if (this.courtCaseClicked) {
           this.courtCaseClicked(court_case)
         }
       }
     },
+    mounted() {
+      Noticekeeper.getCourtCases()
+                  .then((court_cases) => {
+                    this.$store.state.court_cases = court_cases
+                  })
+    },
+
     computed: {
       ...mapState([
         'court_cases'

@@ -7,10 +7,13 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
   // initial state
   state: {
-    court_cases: Mock.all_cases
+    court_cases: []
   },
 
   mutations: {
+    setCourtCases(state, court_cases) {
+      state.court_cases = court_cases
+    }
   },
 
 })

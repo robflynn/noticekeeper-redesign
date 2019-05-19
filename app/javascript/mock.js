@@ -1,4 +1,4 @@
-const all_cases = [
+const all_court_cases = [
   {
     id: 1,
     attorney: "AB",
@@ -24,5 +24,5 @@ const all_cases = [
 ]
 
 export default {
-  all_cases: all_cases
+  all_court_cases: all_court_cases
 }
