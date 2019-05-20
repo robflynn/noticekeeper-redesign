@@ -1,8 +1,29 @@
 <template>
   <div class="noticekeeper">
-    <cases-view :courtCaseClicked="didSelectCourtCase" />
+
+    <nav>
+      <ul>
+        <li><router-link to='/'>Cases</router-link></li>
+        <li>Events</li>
+        <li>Account</li>
+      </ul>
+    </nav>
+
+    <router-view />
+
   </div>
 </template>
+
+<style lang="scss">
+  nav {
+    ul {
+      li {
+        display: inline-block;
+        padding: 0.5em;
+      }      
+    }
+  }
+</style>
 
 <script>
 import CasesView from './packs/components/cases_view.vue'

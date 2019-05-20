@@ -19,19 +19,18 @@ import App from '../app.vue'
 // import our state manager
 import { store } from './store'
 
+import routes from './routes'
+
 // Register our global components
 // Vue.component('sidebar', Sidebar)
 
 Vue.use(Vuex)
 
+Vue.use(Router)
+const router = new Router({ routes })
+
 // Let's hack it for now
 window.Noticekeeper = Noticekeeper
-
-Vue.use(Router)
-const router = new Router({
-    routes: [
-    ]
-})
 
 document.addEventListener("turbolinks:load", function() {
     var element = document.querySelector("#noticekeeper")
