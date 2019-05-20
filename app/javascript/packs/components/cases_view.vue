@@ -161,7 +161,9 @@
     },
     mounted() {
       Noticekeeper.getCourtCases()
-                  .then((court_cases) => {
+                  .then((response) => {
+                    let court_cases = response.data
+                    
                     this.$store.state.court_cases = court_cases
                   })
     },

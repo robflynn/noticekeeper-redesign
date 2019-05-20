@@ -23,6 +23,21 @@ const all_court_cases = [
   }
 ]
 
+const court_cases_index = {
+  pages: {
+    count: 3,
+    page: 1,
+    per_page: 25,
+    self: '/court_cases?page=1',    
+    next: "/court_cases?page=2"
+  },
+  data: {
+    ...all_court_cases    
+  },
+  status: "success",
+}
+
 export default {
-  all_court_cases: all_court_cases
+  all_court_cases: all_court_cases,
+  court_cases_index: court_cases_index,
 }
