@@ -1,5 +1,4 @@
 import Mock from '../mock'
-import '../stylesheets/noticekeeper.scss'
 
 console.log(Mock.court_cases_index)
 

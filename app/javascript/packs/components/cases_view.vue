@@ -59,7 +59,8 @@
     flex: 1;
   }
 
-  .table {
+
+ .table {
     $cellPadding: 0.5em;
     $yellow: rgb(244, 247, 180);
     $darkBlue: rgb(42, 69, 112);
