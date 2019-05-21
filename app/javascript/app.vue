@@ -9,7 +9,7 @@
       </ul>
     </nav>
 
-    <router-view />
+    <router-view @didSelectCourtCase="didSelectCourtCase"/>
 
   </div>
 </template>
@@ -37,9 +37,9 @@ export default {
 
   computed: {},
 
-  methods: {
-    didSelectCourtCase: (court_case) => {
-      console.log(court_case)
+  methods: {    
+    didSelectCourtCase: function(court_case) {
+      this.$router.push({ name: 'court_cases_show', params: { slug: court_case.id }})
     }    
   },
 

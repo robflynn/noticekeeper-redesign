@@ -25,8 +25,8 @@ import routes from './routes'
 // Vue.component('sidebar', Sidebar)
 
 Vue.use(Vuex)
-
 Vue.use(Router)
+
 const router = new Router({ routes })
 
 // Let's hack it for now

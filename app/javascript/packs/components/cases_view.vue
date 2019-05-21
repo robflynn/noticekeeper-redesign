@@ -1,8 +1,6 @@
 <template>
   <div>
     <div class="flex row">
-      {{ message }}
-      {{ reversedMessage }}
       <table class="cases-list table datatable flex-grow table-header--left">
         <thead>
           <tr>
@@ -144,16 +142,6 @@
   import Mock from '../../mock'
 
   export default {
-    data: function() {
-      return {
-        message: 'hey'
-      }
-    },
-    computed: {
-      reversedMessage: function() {
-        return this.message.split('').reverse().join('')
-      }
-    },
     props: {
       courtCaseClicked: {
         required: false,
@@ -166,6 +154,8 @@
       },
 
       courtCaseSelected(evt, court_case) {
+        this.$emit('didSelectCourtCase', court_case)
+
         if (this.courtCaseClicked) {
           this.courtCaseClicked(court_case)
         }
