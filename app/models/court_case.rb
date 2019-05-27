@@ -4,20 +4,21 @@
 #
 #  id          :bigint           not null, primary key
 #  user_id     :bigint
-#  name        :string
+#  case_name   :string
 #  case_number :string
-#  state       :string
-#  status      :integer          default(0)
+#  case_state  :string
+#  case_type   :string
+#  status      :integer          default("open")
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 # Indexes
 #
-#  index_court_cases_on_user_id             (user_id)
-#  index_court_cases_on_user_id_and_name    (user_id,name)
-#  index_court_cases_on_user_id_and_status  (user_id,status)
+#  index_court_cases_on_user_id                (user_id)
+#  index_court_cases_on_user_id_and_case_name  (user_id,case_name)
+#  index_court_cases_on_user_id_and_status     (user_id,status)
 #
 
 class CourtCase < ApplicationRecord
-  enum status: { open: 0, closed: 1 }
+  enum status: { active: "active", inactive: "inactive" }
 end
