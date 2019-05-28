@@ -45,7 +45,6 @@
       <h1>Proofs of Claim</h1>
 
       <div class="flex row">
-
         <datatable
           v-if="court_case"
           :datasource="court_case.notices" 
@@ -53,6 +52,15 @@
           :rowWasSelected="noticeClicked" />
       </div>
     </section>
+
+    <section class="box padded">
+      <h1>Notices</h1>
+
+      <div class="flex row">
+        Notices go here, Proofs of claim above should only be of type claim
+      </div>
+    </section>    
+
   </div>
 </template>
 
@@ -231,13 +239,13 @@
       let case_id = this.$route.params.slug
 
       Noticekeeper.getCourtCase(case_id)
-                .then((response) => {
-                  let court_case = response    
-                  console.log("Loaded data for the following court case:")
-                  console.log(court_case)
+        .then((response) => {
+          let court_case = response    
+          console.log("Loaded data for the following court case:")
+          console.log(court_case)
 
-                  this.court_case = court_case
-                })      
+          this.court_case = court_case
+        })      
     }
   }
 </script>
