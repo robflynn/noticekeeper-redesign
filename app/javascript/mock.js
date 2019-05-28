@@ -1,6 +1,6 @@
 const all_court_cases = [
   {
-    id: 1,
+    id: 0,
     attorney: "AB",
     case_name: "Bob Client",
     case_number: "SC-19-1234",
@@ -11,7 +11,7 @@ const all_court_cases = [
     last_activity: "yesterday"
   },
   {
-    id: 2,
+    id: 1,
     attorney: "AB",
     case_name: "Billy Client",
     case_number: "SC-19-1234",
@@ -22,7 +22,7 @@ const all_court_cases = [
     last_activity: "yesterday"
   },
   {
-    id: 3,
+    id: 2,
     attorney: "QQ",
     case_name: "Herbert Herbertson",
     case_number: "SC-19-9534",
@@ -48,8 +48,10 @@ const court_cases_index = {
   status: "success",
 }
 
-const court_case_get = {
-  ...all_court_cases[0]
+const court_case_get = (case_id) => {
+  return {
+    ...all_court_cases[case_id]
+  }
 }
 
 export default {

@@ -48,7 +48,6 @@
         <table class="table">
           <thead>
             <tr>
-              <th></th>
               <th>Notice</th>
               <th>Creditor</th>
               <th>Amount</th>

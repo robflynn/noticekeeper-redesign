@@ -8,7 +8,7 @@ class Noticekeeper {
   }
 
   static getCourtCase(case_id) {
-    return Noticekeeper.mock(Mock.court_case_get)
+    return Noticekeeper.mock(Mock.court_case_get(case_id))
   }
 
   static mock(response, delay = 200) {
