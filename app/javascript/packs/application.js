@@ -27,6 +27,13 @@ import routes from './routes'
 Vue.use(Vuex)
 Vue.use(Router)
 
+import DataTable from './components/datatable'
+import DataTableHeader from './components/datatable-header'
+
+Vue.component('datatable', DataTable)
+Vue.component('datatable-header', DataTableHeader)
+
+
 const router = new Router({ routes })
 
 // Let's hack it for now

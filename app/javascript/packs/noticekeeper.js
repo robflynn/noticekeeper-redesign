@@ -1,7 +1,5 @@
 import Mock from '../mock'
 
-console.log(Mock.court_cases_index)
-
 class Noticekeeper {
   static getCourtCases() {
     return Noticekeeper.mock(Mock.court_cases_index)
@@ -11,7 +9,7 @@ class Noticekeeper {
     return Noticekeeper.mock(Mock.court_case_get(case_id))
   }
 
-  static mock(response, delay = 200) {
+  static mock(response, delay = 50) {
     var promise = new Promise(function (resolve, reject) {
       setTimeout(function () {
         resolve(response);

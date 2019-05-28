@@ -1,6 +1,11 @@
 <template>
   <div>
     <div class="flex row">
+      <datatable 
+        :datasource="court_cases" 
+        :columns="court_cases_columns"
+      />
+
       <table class="cases-list table datatable flex-grow table-header--left">
         <thead>
           <tr>
@@ -141,14 +146,27 @@
 <script>
   import { mapState } from 'vuex'
   import Mock from '../../mock'
+  
+  import Datatable from './datatable'
 
   export default {
+    components: {
+      Datatable
+    },
     props: {
       courtCaseClicked: {
         required: false,
         type: Function
       },
     },
+    data: function() {
+      return { 
+        court_cases_columns: {
+          'Name': 'case_name',
+          'Case Number': 'case_number'
+        }
+      }
+    },    
     methods: {
       setCourtCases(court_cases) {
         this.court_cases = court_cases
@@ -174,7 +192,7 @@
     computed: {
       ...mapState([
         'court_cases'
-      ])
+      ]),
     },
   }
 </script>
