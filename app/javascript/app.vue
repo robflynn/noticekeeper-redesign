@@ -23,6 +23,26 @@
       }      
     }
   }
+
+  .flex {
+    display: flex;
+
+    &.row {
+      flex-direction: row;
+    }
+
+    &.column {
+      flex-direction: column;
+    }
+
+    &.grow {
+      flex: 1;
+    }
+  }
+
+  .flex-grow {
+    flex: 1;
+  }  
 </style>
 
 <script>

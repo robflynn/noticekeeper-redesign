@@ -44,25 +44,13 @@
     <section class="box padded">
       <h1>Proofs of Claim</h1>
 
-      <div>
-        <table class="table table--full">
-          <thead>
-            <tr>
-              <th>Notice</th>
-              <th>Creditor</th>
-              <th>Amount</th>
-              <th>Received</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="notice in court_case.notices" :key="notice.id">
-              <td>{{ notice.title }}</td>
-              <td>{{ notice.creditor }}</td>
-              <td>{{ notice.claim_amount }}</td>
-              <td>{{ notice.created_at }}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="flex row">
+
+        <datatable
+          v-if="court_case"
+          :datasource="court_case.notices" 
+          :columns="notices_columns"
+          :rowWasSelected="noticeClicked" />
       </div>
     </section>
   </div>
@@ -221,12 +209,24 @@
     data: function() {
       return { 
         court_case: dummyCase,
+        notices_columns: {
+          'Notice': 'title',
+          'Creditor': 'creditor',
+          'Amount': 'total_claims',
+          'Received': 'created_at'
+        }
       }
     },
+
     methods: {
+      noticeClicked(notice) {
+        console.log(notice)
+      }
     },
+
     computed: {
     },
+
     mounted() {
       let case_id = this.$route.params.slug
 

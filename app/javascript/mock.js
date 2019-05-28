@@ -61,6 +61,7 @@ const all_notices = [
     raw: "Some legal mumbo jumbo in raw form",
     amended: false,
     status: "new",
+    total_claims: '1024.44',
     created_at: "2019-01-01",
     updated_at: "2019-01-01"
   }
