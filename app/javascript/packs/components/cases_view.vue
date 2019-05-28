@@ -19,7 +19,7 @@
           <tr v-for="court_case in court_cases" :key="court_case.id" :data-case-id="court_case.id" @click="courtCaseSelected($event, court_case)">
             <td></td>
             <td></td>
-            <td>{{ court_case.name }}</td>
+            <td>{{ court_case.case_name }}</td>
             <td>{{ court_case.case_number }}</td>
             <td>{{ court_case.state }}</td>
             <td>{{ court_case.notices }}</td>

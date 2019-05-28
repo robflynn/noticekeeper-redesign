@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="box">
-      <h1>$CaseNumber$ - $CaseName$</h1>
+      <h1>{{ court_case.case_number }} - {{ court_case.case_name }}</h1>
 
       <div>
         <table class="metadata">
@@ -10,13 +10,13 @@
               <th scope="col">
                 Attorney
               </th>
-              <td>$Attorney$</td>
+              <td>{{ court_case.attorney }}</td>
             </tr>
             <tr>
               <th scope="col">
                 Status
               </th>
-              <td>$Status$</td>
+              <td>{{ court_case.status }}</td>
             </tr>
             <tr>
               <th scope="col">
@@ -28,13 +28,13 @@
               <th scope="col">
                 State
               </th>
-              <td>$State$</td>
+              <td>{{ court_case.state }}</td>
             </tr>
             <tr>
               <th scope="col">
                 Total Claim Amount
               </th>
-              <td>$Total Claim Amount$</td>
+              <td>${{ court_case.total_claims }}</td>
             </tr>
           </tbody>
         </table>
@@ -57,35 +57,30 @@
           </thead>
           <tbody>
             <tr>
-              <td></td>
               <td>Proof of Claim</td>
               <td>Something Associates, LLC</td>
               <td>$1234.56</td>
               <td>March 22rd, 2293 at 19:55 PM</td>
             </tr>
             <tr>
-              <td></td>
               <td>Proof of Claim</td>
               <td>Something Associates, LLC</td>
               <td>$1234.56</td>
               <td>March 22rd, 2293 at 19:55 PM</td>
             </tr>
             <tr>
-              <td></td>
               <td>Proof of Claim</td>
               <td>Something Associates, LLC</td>
               <td>$1234.56</td>
               <td>March 22rd, 2293 at 19:55 PM</td>
             </tr>
             <tr>
-              <td></td>
               <td>Proof of Claim</td>
               <td>Something Associates, LLC</td>
               <td>$1234.56</td>
               <td>March 22rd, 2293 at 19:55 PM</td>
             </tr>
             <tr>
-              <td></td>
               <td>Proof of Claim</td>
               <td>Something Associates, LLC</td>
               <td>$1234.56</td>
@@ -181,6 +176,12 @@
     }
   }  
 
+    td {
+      &:empty {
+        background: red !important;
+      }
+    }  
+
   // TODO: Move me into a style!
   .box {
     display: block;
@@ -228,12 +229,34 @@
   import { mapState } from 'vuex'
   import Mock from '../../mock'
 
+  let dummyCase = {
+    case_number: "",
+    case_name: "",
+    case_state: "",
+    total_clains: 0.00
+  }
+
   export default {
-    props: {
+    data: function() {
+      return { 
+        court_case: dummyCase
+      }
     },
     methods: {
     },
     computed: {
     },
+    mounted() {
+      let case_id = this.$route.params.slug
+
+      Noticekeeper.getCourtCase(case_id)
+                .then((response) => {
+                  let court_case = response    
+                  console.log("Loaded data for the following court case:")
+                  console.log(court_case)
+
+                  this.court_case = court_case
+                })
+    }
   }
 </script>
