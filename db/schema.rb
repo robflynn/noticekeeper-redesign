@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_031223) do
+ActiveRecord::Schema.define(version: 2019_05_28_033216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,23 @@ ActiveRecord::Schema.define(version: 2019_05_27_031223) do
     t.index ["user_id", "case_name"], name: "index_court_cases_on_user_id_and_case_name"
     t.index ["user_id", "status"], name: "index_court_cases_on_user_id_and_status"
     t.index ["user_id"], name: "index_court_cases_on_user_id"
+  end
+
+  create_table "notices", force: :cascade do |t|
+    t.integer "client_id"
+    t.string "title", limit: 200
+    t.text "body"
+    t.string "notice_type"
+    t.integer "document_number"
+    t.string "document_url"
+    t.text "raw"
+    t.boolean "amended", default: false
+    t.string "status", limit: 16, default: "new"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_notices_on_client_id"
+    t.index ["created_at"], name: "index_notices_on_created_at"
+    t.index ["status"], name: "index_notices_on_status"
   end
 
   create_table "users", force: :cascade do |t|

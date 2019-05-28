@@ -48,9 +48,30 @@ const court_cases_index = {
   status: "success",
 }
 
+const all_notices = [
+  {
+    id: 1,
+    client_id: 1,
+    title: "Proof of Claim",
+    body: "Some legal mumbo jumbo",
+    creditor: "Jake the Dinosaur",
+    notice_type: "claim",
+    document_number: 1,
+    document_url: "https://noticekeeper.com",
+    raw: "Some legal mumbo jumbo in raw form",
+    amended: false,
+    status: "new",
+    created_at: "2019-01-01",
+    updated_at: "2019-01-01"
+  }
+]
+
 const court_case_get = (case_id) => {
   return {
-    ...all_court_cases[case_id]
+    ...all_court_cases[case_id],
+    notices: [
+      ...all_notices
+    ]
   }
 }
 

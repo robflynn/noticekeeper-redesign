@@ -22,7 +22,7 @@
               <th scope="col">
                 Chapter
               </th>
-              <td>$Chapter$</td>
+              <td></td>
             </tr>
             <tr>
               <th scope="col">
@@ -45,7 +45,7 @@
       <h1>Proofs of Claim</h1>
 
       <div>
-        <table class="table">
+        <table class="table table--full">
           <thead>
             <tr>
               <th>Notice</th>
@@ -55,35 +55,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Proof of Claim</td>
-              <td>Something Associates, LLC</td>
-              <td>$1234.56</td>
-              <td>March 22rd, 2293 at 19:55 PM</td>
-            </tr>
-            <tr>
-              <td>Proof of Claim</td>
-              <td>Something Associates, LLC</td>
-              <td>$1234.56</td>
-              <td>March 22rd, 2293 at 19:55 PM</td>
-            </tr>
-            <tr>
-              <td>Proof of Claim</td>
-              <td>Something Associates, LLC</td>
-              <td>$1234.56</td>
-              <td>March 22rd, 2293 at 19:55 PM</td>
-            </tr>
-            <tr>
-              <td>Proof of Claim</td>
-              <td>Something Associates, LLC</td>
-              <td>$1234.56</td>
-              <td>March 22rd, 2293 at 19:55 PM</td>
-            </tr>
-            <tr>
-              <td>Proof of Claim</td>
-              <td>Something Associates, LLC</td>
-              <td>$1234.56</td>
-              <td>March 22rd, 2293 at 19:55 PM</td>
+            <tr v-for="notice in court_case.notices" :key="notice.id">
+              <td>{{ notice.title }}</td>
+              <td>{{ notice.creditor }}</td>
+              <td>{{ notice.claim_amount }}</td>
+              <td>{{ notice.created_at }}</td>
             </tr>
           </tbody>
         </table>
@@ -104,6 +80,10 @@
     $darkBlue: rgb(42, 69, 112);
     $rowBorder: solid 1px rgba(0, 0, 0, 0.1);
 
+    &--full {
+      width: 100%;
+    }
+
     thead {
       tr {
         th, td {        
@@ -111,6 +91,7 @@
           color: #eee;
           font-weight: bold;
           padding: $cellPadding;
+          text-align: left;
         }
 
         &:last-child {
@@ -232,13 +213,14 @@
     case_number: "",
     case_name: "",
     case_state: "",
-    total_clains: 0.00
+    total_clains: 0.00,
+    notices: [],
   }
 
   export default {
     data: function() {
       return { 
-        court_case: dummyCase
+        court_case: dummyCase,
       }
     },
     methods: {
@@ -255,7 +237,7 @@
                   console.log(court_case)
 
                   this.court_case = court_case
-                })
+                })      
     }
   }
 </script>

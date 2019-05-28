@@ -8,7 +8,7 @@
 #  case_number :string
 #  case_state  :string
 #  case_type   :string
-#  status      :integer          default("open")
+#  status      :integer          default(NULL)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
