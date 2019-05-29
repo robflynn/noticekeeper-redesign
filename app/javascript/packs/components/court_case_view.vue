@@ -47,7 +47,7 @@
       <div class="flex row">
         <datatable
           v-if="court_case"
-          :datasource="court_case.notices" 
+          :datasource="court_case.notices"
           :columns="notices_columns"
           :rowWasSelected="noticeClicked" />
       </div>
@@ -59,7 +59,7 @@
       <div class="flex row">
         Notices go here, Proofs of claim above should only be of type claim
       </div>
-    </section>    
+    </section>
 
   </div>
 </template>
@@ -82,7 +82,7 @@
 
     thead {
       tr {
-        th, td {        
+        th, td {
           background: $darkBlue;
           color: #eee;
           font-weight: bold;
@@ -92,7 +92,7 @@
 
         &:last-child {
           th, td {
-            border-bottom: solid 1px rgba(0, 0, 0, 0.1)        
+            border-bottom: solid 1px rgba(0, 0, 0, 0.1)
           }
         }
       }
@@ -150,13 +150,13 @@
         }
       }
     }
-  }  
+  }
 
     td {
       &:empty {
         background: red !important;
       }
-    }  
+    }
 
   // TODO: Move me into a style!
   .box {
@@ -184,7 +184,7 @@
 
     th, td {
       padding: 10px;
-      border: $rowBorder;      
+      border: $rowBorder;
     }
 
     th {
@@ -215,7 +215,7 @@
 
   export default {
     data: function() {
-      return { 
+      return {
         court_case: dummyCase,
         notices_columns: {
           'Notice': 'title',
@@ -228,7 +228,7 @@
 
     methods: {
       noticeClicked(notice) {
-        console.log(notice)
+        this.$emit('didSelectNotice', notice)
       }
     },
 
@@ -240,12 +240,12 @@
 
       Noticekeeper.getCourtCase(case_id)
         .then((response) => {
-          let court_case = response    
+          let court_case = response
           console.log("Loaded data for the following court case:")
           console.log(court_case)
 
           this.court_case = court_case
-        })      
+        })
     }
   }
 </script>

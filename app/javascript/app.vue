@@ -9,7 +9,7 @@
       </ul>
     </nav>
 
-    <router-view @didSelectCourtCase="didSelectCourtCase"/>
+    <router-view @didSelectCourtCase="didSelectCourtCase" @didSelectNotice="didSelectNotice"/>
 
   </div>
 </template>
@@ -20,7 +20,7 @@
       li {
         display: inline-block;
         padding: 0.5em;
-      }      
+      }
     }
   }
 
@@ -42,7 +42,7 @@
 
   .flex-grow {
     flex: 1;
-  }  
+  }
 </style>
 
 <script>
@@ -57,10 +57,14 @@ export default {
 
   computed: {},
 
-  methods: {    
+  methods: {
     didSelectCourtCase: function(court_case) {
       this.$router.push({ name: 'court_cases_show', params: { slug: court_case.id }})
-    }    
+    },
+
+    didSelectNotice(notice) {
+      this.$router.push({ name: 'court_case_notices_show', params: { case_id: 1, id: notice.id } })
+    }
   },
 
   mounted() {},
