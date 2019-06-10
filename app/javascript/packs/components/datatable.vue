@@ -1,6 +1,6 @@
 <template>
   <table class="table datatable flex-grow table-header--left">
-    <thead>        
+    <thead>
       <tr>
         <datatable-header
           v-for="(column, i) in columns"
@@ -21,7 +21,7 @@
       <tr>
         <th colspan="8">Footer</th>
       </tr>
-    </tfoot>   
+    </tfoot>
 
   </table>
 </template>
@@ -66,80 +66,5 @@
 </script>
 
 <style lang="scss">
- .table {
-    $cellPadding: 0.5em;
-    $yellow: rgb(244, 247, 180);
-    $darkBlue: rgb(42, 69, 112);
-    $rowBorder: solid 1px rgba(0, 0, 0, 0.1);
-
-    thead {
-      tr {
-        th, td {        
-          background: $darkBlue;
-          color: #eee;
-          font-weight: bold;
-          padding: $cellPadding;
-        }
-
-        &:last-child {
-          th, td {
-            border-bottom: solid 1px rgba(0, 0, 0, 0.1)        
-          }
-        }
-      }
-    }
-
-    &-header {
-      &--left {
-        thead th,
-        thead td {
-          text-align: left;
-        }
-      }
-    }
-
-    tbody {
-      td {
-        padding: $cellPadding;
-      }
-
-      tr {
-        &:nth-child(odd) {
-          td {
-            background-color: #eee;
-            border-bottom: $rowBorder;
-          }
-        }
-
-        &:last-child {
-          td {
-            border-bottom: $rowBorder;
-          }
-        }
-
-        &:hover {
-          td {
-            background-color: $yellow;
-            cursor: pointer;
-          }
-        }
-      }
-    }
-
-    tfoot {
-      th, td {
-        background: #444;
-        color: #fff;
-        padding: $cellPadding;
-      }
-
-      tr {
-        &:last-child {
-          td, th {
-            border-bottom: $rowBorder;
-          }
-        }
-      }
-    }
-  }  
+  @import "../../stylesheets/global_workaround.scss";
 </style>
