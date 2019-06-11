@@ -12,10 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_05_28_033216) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "court_cases", force: :cascade do |t|
+  create_table "court_cases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.string "case_name"
     t.string "case_number"
@@ -29,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_033216) do
     t.index ["user_id"], name: "index_court_cases_on_user_id"
   end
 
-  create_table "notices", force: :cascade do |t|
+  create_table "notices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "client_id"
     t.string "title", limit: 200
     t.text "body"
@@ -46,7 +43,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_033216) do
     t.index ["status"], name: "index_notices_on_status"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "account_id"
     t.string "mail_alias", limit: 8
     t.string "email", limit: 200
