@@ -2,7 +2,7 @@ import Mock from '../mock'
 
 class Noticekeeper {
   static getCourtCases() {
-    return Noticekeeper.mock(Mock.court_cases_index)
+    return Noticekeeper.get_court_cases()
   }
 
   static getCourtCase(case_id) {
@@ -17,6 +17,18 @@ class Noticekeeper {
     });
 
     return promise;
+  }
+
+  static get_court_cases() {
+    var promise = new Promise( (resolve, reject) => {
+      fetch('/api/cases').then((response) => {
+        return response.json()
+      }).then( (cases) => {
+        resolve(cases)
+      })
+    })
+
+    return promise
   }
 }
 

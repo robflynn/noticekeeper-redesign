@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="flex row">
-      <datatable 
-        :datasource="court_cases" 
-        :columns="court_cases_columns"        
+      <datatable
+        :datasource="court_cases"
+        :columns="court_cases_columns"
         :rowWasSelected="rowWasSelected"
       />
     </div>
@@ -35,7 +35,7 @@
 <script>
   import { mapState } from 'vuex'
   import Mock from '../../mock'
-  
+
   import Datatable from './datatable'
 
   export default {
@@ -46,10 +46,10 @@
       courtCaseClicked: {
         required: false,
         type: Function
-      },      
+      },
     },
     data: function() {
-      return { 
+      return {
         court_cases_columns: {
           'Name': 'case_name',
           'Case Number': 'case_number',
@@ -59,7 +59,7 @@
           'Last Activity': 'last_activity'
         }
       }
-    },    
+    },
     methods: {
       setCourtCases(court_cases) {
         this.court_cases = court_cases
@@ -81,7 +81,7 @@
       Noticekeeper.getCourtCases()
                   .then((response) => {
                     let court_cases = response.data
-                    
+
                     this.$store.state.court_cases = court_cases
                   })
     },
