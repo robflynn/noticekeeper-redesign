@@ -8,9 +8,21 @@
           <tbody>
             <tr>
               <th scope="col">
+                Case Number
+              </th>
+              <td>{{ court_case.case_number }}</td>
+            </tr>
+            <tr>
+              <th scope="col">
+                Case Name
+              </th>
+              <td>{{ court_case.case_name }}</td>
+            </tr>
+            <tr>
+              <th scope="col">
                 Attorney
               </th>
-              <td>{{ court_case.attorney }}</td>
+              <td>{{ court_case.user_id }}</td>
             </tr>
             <tr>
               <th scope="col">
@@ -28,7 +40,7 @@
               <th scope="col">
                 State
               </th>
-              <td>{{ court_case.state }}</td>
+              <td>{{ court_case.case_state }}</td>
             </tr>
             <tr>
               <th scope="col">

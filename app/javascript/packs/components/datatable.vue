@@ -17,12 +17,6 @@
       </tr>
     </tbody>
 
-    <tfoot>
-      <tr>
-        <th colspan="8">Footer</th>
-      </tr>
-    </tfoot>
-
   </table>
 </template>
 

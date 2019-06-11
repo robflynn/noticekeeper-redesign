@@ -6,7 +6,7 @@ class Noticekeeper {
   }
 
   static getCourtCase(case_id) {
-    return Noticekeeper.mock(Mock.court_case_get(case_id))
+    return Noticekeeper.get_court_case(case_id);
   }
 
   static mock(response, delay = 50) {
@@ -25,6 +25,18 @@ class Noticekeeper {
         return response.json()
       }).then( (cases) => {
         resolve(cases)
+      })
+    })
+
+    return promise
+  }
+
+  static get_court_case(case_id) {
+    var promise = new Promise( (resolve, reject) => {
+      fetch(`/api/cases/${case_id}`).then((response) => {
+        return response.json()
+      }).then( (court_case) => {
+        resolve(court_case)
       })
     })
 

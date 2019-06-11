@@ -20,6 +20,13 @@ class Api::CourtCasesController < ApplicationController
     }
   end
 
+  def show
+    @court_case = CourtCase.find(params[:id])
+    @court_case.notices = []
+
+    render json: @court_case
+  end
+
   private def respond_with_json
     request.format = :json
   end
