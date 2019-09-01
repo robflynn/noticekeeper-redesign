@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="box">
-      <h1>$$Notice Title$$ | Notification</h1>
+      <h1>{{ notice.title }}</h1>
 
       <div>
 
@@ -13,25 +13,27 @@
               <th scope="col">
                 Case Name
               </th>
-              <td>$$case_name$$</td>
+              <td>{{ courtCase.case_name }}</td>
             </tr>
             <tr>
               <th scope="col">
                 Case Number
               </th>
-              <td>$$case_number$$</td>
+              <td>{{ courtCase.case_number }}</td>
             </tr>
             <tr>
               <th scope="col">
                 State
               </th>
-              <td>$$state$$</td>
+              <td>{{ courtCase.case_state }}</td>
             </tr>
             <tr>
               <th scope="col">
                 Document Number
               </th>
-              <td>$$document_number$$</td>
+              <td>
+                <a v-bind:href="notice.document_url" target="_blank">{{ notice.document_number }}</a>
+              </td>
             </tr>
             <tr>
               <th scope="col">
@@ -41,7 +43,7 @@
             </tr>
             <tr class="full">
               <td colspan="2">
-                $$body$$
+                {{ notice.body }}
               </td>
             </tr>
           </tbody>
@@ -82,7 +84,39 @@
 </template>
 
 <script>
-  export default {}
+  import { mapState } from 'vuex'
+
+  let dummyNotice = {
+    title: ""
+  }
+
+  let dummyCase = {
+    case_number: "",
+    case_name: "",
+    case_state: "",
+    total_clains: 0.00
+  }
+
+  export default {
+    data: function() {
+      return {
+        notice: dummyNotice,
+        courtCase: dummyCase
+      }
+    },
+    mounted() {
+      let case_id = this.$route.params.case_id
+      let notice_id = this.$route.params.id
+
+      Noticekeeper.getNotice(case_id, notice_id).then((response) => {
+        this.notice = response
+      })
+
+      Noticekeeper.getCourtCase(case_id).then((response) => {
+        this.courtCase = response
+      })
+    }
+  }
 </script>
 
 <style lang="scss">

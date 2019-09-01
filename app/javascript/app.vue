@@ -63,7 +63,7 @@ export default {
     },
 
     didSelectNotice(notice) {
-      this.$router.push({ name: 'court_case_notices_show', params: { case_id: 1, id: notice.id } })
+      this.$router.push({ name: 'court_case_notices_show', params: { case_id: notice.case_id, id: notice.id } })
     }
   },
 

@@ -6,10 +6,12 @@ class Api::NoticesController < ApplicationController
 
   def index
     paginate @context.notices, per_page: @@per_page_limit
-
   end
 
   def show
+    @notice = @context.notices.find(params[:id])
+
+    render json: @notice
   end
 
   private
