@@ -56,26 +56,15 @@
 
       <div>
         <div class="document-list">
-          <div class="col document">
-            <img style="width: 140px; height: 175px;"/>
+
+          <!-- doc -->
+          <div v-for="document in documents" :key="document.id" class="col document">
+            <img style="width: 140px; height: 175px;" v-bind:src="document.thumbnail_url" />
 
             <button>Download</button>
           </div>
-          <div class="col document">
-            <img style="width: 140px; height: 175px;"/>
+          <!-- end doc -->
 
-            <button>Download</button>
-          </div>
-          <div class="col document">
-            <img style="width: 140px; height: 175px;"/>
-
-            <button>Download</button>
-          </div>
-          <div class="col document">
-            <img style="width: 140px; height: 175px;"/>
-
-            <button>Download</button>
-          </div>
         </div>
       </div>
     </section>
@@ -101,7 +90,8 @@
     data: function() {
       return {
         notice: dummyNotice,
-        courtCase: dummyCase
+        courtCase: dummyCase,
+        documents: []
       }
     },
     mounted() {
@@ -114,6 +104,10 @@
 
       Noticekeeper.getCourtCase(case_id).then((response) => {
         this.courtCase = response
+      })
+
+      Noticekeeper.getDocuments(case_id, notice_id).then((response) => {
+        this.documents = response
       })
     }
   }

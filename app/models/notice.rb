@@ -21,6 +21,9 @@
 #  index_notices_on_status      (status)
 #
 
-class Notice < ApplicationRecord    
+class Notice < ApplicationRecord
     enum notice_type: { claim: "claim", document: "document" }
+
+    belongs_to :court_case, foreign_key: 'client_id'
+    has_many :documents
 end
