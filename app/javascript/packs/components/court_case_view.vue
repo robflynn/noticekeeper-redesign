@@ -54,11 +54,6 @@
     </section>
 
     <section class="box padded">
-      <h1>Proofs of Claim</h1>
-
-    </section>
-
-    <section class="box padded">
       <h1>Notices</h1>
 
       <div class="flex row">
@@ -94,7 +89,8 @@
         court_case: dummyCase,
         notices: [],
         notices_columns: {
-          'Notice': 'title'
+          'Title': 'title',
+          'Received': 'updated_at'
         }
       }
     },
