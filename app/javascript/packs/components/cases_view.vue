@@ -53,10 +53,8 @@
         court_cases_columns: {
           'Name': 'case_name',
           'Case Number': 'case_number',
-          'State': 'state',
-          'Notices': 'notices',
-          'Claims': 'total_claims',
-          'Last Activity': 'last_activity'
+          'State': 'case_state',
+          'Last Activity': 'updated_at'
         }
       }
     },
@@ -80,7 +78,7 @@
     mounted() {
       Noticekeeper.getCourtCases()
                   .then((response) => {
-                    let court_cases = response.data
+                    let court_cases = response
 
                     this.$store.state.court_cases = court_cases
                   })

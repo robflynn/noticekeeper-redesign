@@ -10,7 +10,7 @@
     </thead>
 
     <tbody>
-      <tr v-for="row in datasource" :key="row">
+      <tr v-for="(row,i) in datasource" :key="i">
         <td v-for="column_key in columns" :key="column_key" @click="_dataTableRowClicked($event, row, column_key)">
           {{ row[column_key] }}
         </td>
