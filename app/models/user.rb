@@ -1,5 +1,5 @@
 class User
   def cases
-    CourtCase.includes(:notices).all
+    CourtCase.all
   end
 end

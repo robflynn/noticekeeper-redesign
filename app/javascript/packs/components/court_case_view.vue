@@ -64,7 +64,7 @@
       <div class="flex row">
         <datatable
           v-if="court_case"
-          :datasource="court_case.notices"
+          :datasource="notices"
           :columns="notices_columns"
           :rowWasSelected="noticeClicked" />
       </div>
@@ -85,14 +85,14 @@
     case_number: "",
     case_name: "",
     case_state: "",
-    total_clains: 0.00,
-    notices: [],
+    total_clains: 0.00
   }
 
   export default {
     data: function() {
       return {
         court_case: dummyCase,
+        notices: [],
         notices_columns: {
           'Notice': 'title'
         }
@@ -111,16 +111,14 @@
     mounted() {
       let case_id = this.$route.params.slug
 
-      Noticekeeper.getCourtCase(case_id)
-        .then((response) => {
-          this.court_case = response
+      Noticekeeper.getCourtCase(case_id).then((response) => {
+        this.court_case = response
+      })
 
-          // load the associated notices
-          Noticekeeper.getCourtCaseNotices(case_id)
-            .then((response) => {
-              this.court_case.notices = response
-            })
-        })
+      // load the associated notices
+      Noticekeeper.getCourtCaseNotices(case_id).then((response) => {
+        this.notices = response
+      })
     }
   }
 </script>
