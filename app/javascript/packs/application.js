@@ -22,9 +22,6 @@ import { store } from './store'
 
 import routes from './routes'
 
-// Register our global components
-// Vue.component('sidebar', Sidebar)
-
 Vue.use(Vuex)
 Vue.use(Router)
 
@@ -33,7 +30,6 @@ import DataTableHeader from './components/datatable-header'
 
 Vue.component('datatable', DataTable)
 Vue.component('datatable-header', DataTableHeader)
-
 
 const router = new Router({ routes })
 

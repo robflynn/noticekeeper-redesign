@@ -14,37 +14,6 @@
   </div>
 </template>
 
-<style lang="scss">
-  nav {
-    ul {
-      li {
-        display: inline-block;
-        padding: 0.5em;
-      }
-    }
-  }
-
-  .flex {
-    display: flex;
-
-    &.row {
-      flex-direction: row;
-    }
-
-    &.column {
-      flex-direction: column;
-    }
-
-    &.grow {
-      flex: 1;
-    }
-  }
-
-  .flex-grow {
-    flex: 1;
-  }
-</style>
-
 <script>
 import CasesView from './packs/components/cases_view.vue'
 
@@ -59,11 +28,11 @@ export default {
 
   methods: {
     didSelectCourtCase: function(court_case) {
-      this.$router.push({ name: 'court_cases_show', params: { slug: court_case.id }})
+      this.$router.push({ name: 'court_case_show', params: { slug: court_case.id }})
     },
 
     didSelectNotice(notice) {
-      this.$router.push({ name: 'court_case_notices_show', params: { case_id: notice.case_id, id: notice.id } })
+      this.$router.push({ name: 'court_case_notice_show', params: { case_id: notice.case_id, id: notice.id } })
     }
   },
 

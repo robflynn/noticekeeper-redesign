@@ -56,17 +56,10 @@
 
       <div>
         <div class="document-list">
-
-          <!-- doc -->
-          <div v-for="document in documents" :key="document.id" class="col document">
-            <img style="width: 140px; height: 175px;" v-bind:src="document.thumbnail_url" />
-
-            <button>Download</button>
-          </div>
-          <!-- end doc -->
-
+          <DocumentPreview v-for="document in documents" :key="document.id" :document="document" />
         </div>
       </div>
+
     </section>
 
   </div>
@@ -74,6 +67,7 @@
 
 <script>
   import { mapState } from 'vuex'
+  import DocumentPreview from './document_preview'
 
   let dummyNotice = {
     title: ""
@@ -87,6 +81,9 @@
   }
 
   export default {
+    components: {
+      DocumentPreview
+    },
     data: function() {
       return {
         notice: dummyNotice,

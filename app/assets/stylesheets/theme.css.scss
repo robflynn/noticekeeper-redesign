@@ -1,0 +1,33 @@
+:root {
+  --main-bg-color: coral;
+}
+
+nav {
+  ul {
+    li {
+      display: inline-block;
+      padding: 0.5em;
+    }
+  }
+}
+
+.flex {
+  display: flex;
+
+  &.row {
+    flex-direction: row;
+  }
+
+  &.column,
+  &.col {
+    flex-direction: column;
+  }
+
+  &.grow {
+    flex: 1;
+  }
+}
+
+.flex-grow {
+  flex: 1;
+}
