@@ -21,6 +21,10 @@ class Noticekeeper {
     return Noticekeeper.get_court_case_notice_documents(case_id, notice_id)
   }
 
+  static getDocument(case_id, notice_id, document_id) {
+    return Noticekeeper.get_court_case_notice_document(case_id, notice_id, document_id)
+  }
+
   static mock(response, delay = 50) {
     var promise = new Promise(function (resolve, reject) {
       setTimeout(function () {
@@ -91,6 +95,17 @@ class Noticekeeper {
     return promise
   }
 
+  static get_court_case_notice_document(case_id, notice_id, document_id) {
+    var promise = new Promise( (resolve, reject) => {
+      fetch(`/api/cases/${case_id}/notices/${notice_id}/documents/${document_id}`).then((response) => {
+        return response.json()
+      }).then( (document) => {
+        resolve(document["document"])
+      })
+    })
+
+    return promise
+  }
 }
 
 export default Noticekeeper

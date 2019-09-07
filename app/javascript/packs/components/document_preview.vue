@@ -18,11 +18,11 @@
 export default {
   name: 'document-preview',
   props: {
-    document: Object
+    document: Object,
+    documentPreviewSelected: Function
   },
   methods: {
     _documentPreviewClicked(e) {
-      console.log(this.document)
       if (this.documentPreviewSelected) {
         this.documentPreviewSelected(this.document)
       }

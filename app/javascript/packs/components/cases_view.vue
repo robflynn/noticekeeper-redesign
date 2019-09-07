@@ -7,7 +7,7 @@
         tmpThing="court_cases"
         :datasource="court_cases"
         :columns="court_cases_columns"
-        :rowWasSelected="rowWasSelected"
+        :rowWasSelected="courtCaseSelected"
       />
     </div>
   </div>
@@ -73,10 +73,6 @@
           this.courtCaseClicked(court_case)
         }
       },
-
-      rowWasSelected(row) {
-        this.courtCaseSelected(row)
-      }
     },
     mounted() {
       Noticekeeper.getCourtCases()

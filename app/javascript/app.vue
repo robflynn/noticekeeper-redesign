@@ -9,7 +9,11 @@
       </ul>
     </nav>
 
-    <router-view @didSelectCourtCase="didSelectCourtCase" @didSelectNotice="didSelectNotice"/>
+    <router-view
+      @didSelectCourtCase="didSelectCourtCase"
+      @didSelectNotice="didSelectNotice"
+      @didSelectDocument="didSelectDocument"
+    />
 
   </div>
 </template>
@@ -27,16 +31,21 @@ export default {
   computed: {},
 
   methods: {
+    // Is this really how I want to do this? It feels super awkward now. I took a long break on
+    // this redesign and my concept for the app has changed.
     didSelectCourtCase: function(court_case) {
       this.$router.push({ name: 'court_case_show', params: { slug: court_case.id }})
     },
 
     didSelectNotice(notice) {
       this.$router.push({ name: 'court_case_notice_show', params: { case_id: notice.case_id, id: notice.id } })
+    },
+
+    didSelectDocument(document) {
+      this.$router.push({ path: document.self })
     }
   },
 
   mounted() {},
-
 };
 </script>

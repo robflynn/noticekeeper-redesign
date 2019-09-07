@@ -20,5 +20,11 @@
 #
 
 class DocumentSerializer < ActiveModel::Serializer
-  attributes :id, :name, :filename, :pages, :pdf_url, :thumbnail_url
+  include Rails.application.routes.url_helpers
+
+  attributes :id, :name, :filename, :pages, :pdf_url, :thumbnail_url, :notice_id, :self
+
+  def self
+    api_case_notice_document_path(object.notice.client_id, object.notice_id, object).gsub('/api', '')
+  end
 end

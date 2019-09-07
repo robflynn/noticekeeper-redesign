@@ -56,10 +56,9 @@
 
       <div>
         <div class="document-list">
-          <DocumentPreview v-for="document in documents" :key="document.id" :document="document" />
+          <DocumentPreview v-for="document in documents" :key="document.id" :document="document" :documentPreviewSelected="_documentClicked" />
         </div>
       </div>
-
     </section>
 
   </div>
@@ -84,6 +83,7 @@
     components: {
       DocumentPreview
     },
+
     data: function() {
       return {
         notice: dummyNotice,
@@ -91,6 +91,16 @@
         documents: []
       }
     },
+
+    methods: {
+      _documentClicked(document) {
+        //court_case_notice_document_show
+        console.log(document)
+
+        this.$emit('didSelectDocument', document)
+      }
+    },
+
     mounted() {
       let case_id = this.$route.params.case_id
       let notice_id = this.$route.params.id
@@ -129,6 +139,5 @@
     button {
       margin-top: 1em;
     }
-
   }
 </style>

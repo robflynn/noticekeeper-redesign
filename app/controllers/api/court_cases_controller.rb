@@ -2,7 +2,7 @@ class Api::CourtCasesController < ApplicationController
   before_action :respond_with_json
 
   def index
-    per_page_limit = 15
+    per_page_limit = 30
 
     @court_cases = current_user.cases.order(sort_by)
 
