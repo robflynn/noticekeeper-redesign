@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'datatable-header',
+  name: 'datatable-header-cell',
   props: {
     'column': String,
     required: true
