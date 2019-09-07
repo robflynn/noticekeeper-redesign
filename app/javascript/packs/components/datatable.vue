@@ -1,8 +1,7 @@
 <template>
   <table class="table datatable flex-grow table-header--left">
     <thead>
-      <tr>
-
+      <tr v-if="this.pagination.total_pages > 1">
         <th v-bind:colspan="Object.keys(this.columns).length">
           Page {{ this.pagination.page }} of {{ this.pagination.total_pages }}
           <button v-bind:disabled="this.pagination.links.prev == undefined" class="datatable--prev" @click="_changePage($event)" v-bind:data-uri="this.pagination.links.prev">Prev</button>

@@ -58,8 +58,9 @@
 
       <div class="flex row">
         <datatable
-          v-if="court_case"
-          :datasource="notices"
+          v-if="court_case.id"
+          :uri="this.notices_url()"
+          tmpThing="notices"
           :columns="notices_columns"
           :rowWasSelected="noticeClicked" />
       </div>
@@ -96,6 +97,15 @@
     },
 
     methods: {
+      notices_url() {
+        if (this.court_case == undefined) {
+          return ""
+        }
+
+      console.log(this.court_case)
+        return `/api/cases/${this.court_case.id}/notices`
+      },
+
       noticeClicked(notice) {
         this.$emit('didSelectNotice', notice)
       }
