@@ -20,10 +20,9 @@ gem 'jwt_sessions'
 
 gem 'redis'
 
-gem 'will_paginate'
-gem 'pager_api'
+gem 'pagy'
+gem 'pager_api', git: 'https://github.com/robflynn/pager-api.git'
 gem 'active_model_serializers', '~> 0.10.0'
-
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

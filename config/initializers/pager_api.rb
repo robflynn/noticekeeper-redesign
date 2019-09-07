@@ -6,7 +6,7 @@ PagerApi.setup do |config|
 
   # Pagination Handler
   # User this option to meet your pagination handler, whether is :kaminari or :will_paginate
-  config.pagination_handler = :will_paginate
+  config.pagination_handler = :pagy
 
   # Includes Pagination information on Meta
   #
