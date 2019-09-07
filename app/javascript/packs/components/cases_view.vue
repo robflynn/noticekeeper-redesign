@@ -2,6 +2,9 @@
   <div>
     <div class="flex row">
       <datatable
+        ref="cases_data_table"
+        uri="/api/cases"
+        tmpThing="court_cases"
         :datasource="court_cases"
         :columns="court_cases_columns"
         :rowWasSelected="rowWasSelected"
