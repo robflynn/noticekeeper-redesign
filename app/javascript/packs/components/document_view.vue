@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="document-view">
     hey im a document
 
-    <div v-if="document">
-      <embed v-bind:src="document.pdf_url" width="800px" height="2100px" class="pdf" />
+    <div v-if="document" class="document">
+      <embed v-bind:src="document.pdf_url" class="pdf" width="100%" />
     </div>
   </div>
 </template>
@@ -19,6 +19,17 @@
 
       Noticekeeper.getDocument(case_id, notice_id, document_id).then((response) => {
         this.document = response
+      })
+    },
+
+    updated() {
+      let pdfs = document.querySelectorAll(".document .pdf")
+
+      pdfs.forEach((pdf) => {
+        let width = pdf.offsetWidth
+        let height = width * 1.4375
+
+        pdf.height = height
       })
     },
 
