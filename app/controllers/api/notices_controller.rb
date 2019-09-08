@@ -2,7 +2,7 @@ class Api::NoticesController < ApplicationController
   include PaginatedResource
 
   def index
-    @per_page_limit = 100
+    @per_page_limit = 15
 
     @notices = @context.notices
 

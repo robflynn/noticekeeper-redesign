@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/robflynn/pager-api.git
-  revision: 66d5a940c1d09f773c783cf2d1bf21a736e3ad19
+  revision: 181879d5f242545d168b073155e92e91070840ce
   specs:
     pager_api (0.3.2.pre.nk)
 

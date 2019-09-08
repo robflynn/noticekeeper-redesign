@@ -1,26 +1,30 @@
 <template>
   <table class="table datatable flex-grow table-header--left">
     <thead>
+      <tr v-if="title" class="datatable__titlerow">
+        <th v-bind:colspan="this.columns.length">
+          <span class="datatable__title">{{ title }}</span>
+        </th>
+      </tr>
 
-      <th v-bind:colspan="this.columns.length">
-        <div class="flex row">
-          <div class="search-bar flex-grow">
-            <input type="text" name="q" ref="searchbar" @keyup="_searchKeyUp" autocomplete="off" placeholder="search or filter" />
+      <tr>
+        <th v-bind:colspan="this.columns.length">
+          <div class="flex row">
+            <div class="search-bar flex-grow">
+              <input type="text" name="q" ref="searchbar" @keyup="_searchKeyUp" autocomplete="off" placeholder="search or filter" />
+            </div>
+
+            <!-- pagination -->
+            <div class="datatable__pagination" v-if="this.pagination.total_pages > 1">
+              Page {{ this.pagination.page }} of {{ this.pagination.total_pages }}
+
+              <button v-bind:disabled="this.pagination.links.prev == undefined" class="datatable--prev" @click="_changePage($event)" v-bind:data-uri="this.pagination.links.prev">Prev</button>
+              <button v-bind:disabled="this.pagination.links.next == undefined" class="datatable--next" @click="_changePage($event)" v-bind:data-uri="this.pagination.links.next">Next</button>
+            </div>
+            <!-- end pagination -->
+
           </div>
-
-          <!-- pagination -->
-          <div class="datatable__pagination" v-if="this.pagination.total_pages > 1">
-            Page {{ this.pagination.page }} of {{ this.pagination.total_pages }}
-
-            <button v-bind:disabled="this.pagination.links.prev == undefined" class="datatable--prev" @click="_changePage($event)" v-bind:data-uri="this.pagination.links.prev">Prev</button>
-            <button v-bind:disabled="this.pagination.links.next == undefined" class="datatable--next" @click="_changePage($event)" v-bind:data-uri="this.pagination.links.next">Next</button>
-          </div>
-          <!-- end pagination -->
-
-        </div>
-      </th>
-
-      <tr v-if="this.pagination.total_pages > 1">
+        </th>
       </tr>
 
       <tr>
@@ -58,6 +62,10 @@
       uri: {
         type: String,
         required: true
+      },
+
+      title: {
+        type: String
       },
 
       // I'm going to change the API and call the results 'data' or 'items'
@@ -164,6 +172,8 @@
     border-style: hidden;
     box-shadow: 0 0 0 1px $border-color;
 
+    background: #fff;
+
     td, th {
       padding: 15px;
       white-space: nowrap;
@@ -223,6 +233,11 @@
     &__pagination {
       padding-top: 10px;
       margin-left: 10px;
+    }
+
+    &__title {
+      font-size: 1.2em;
+      margin-bottom: 0;
     }
 
     .search-bar {

@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="flex row">
+      <div style="margin: 25px; width: 100%;">
       <datatable
         ref="cases_data_table"
         uri="/api/cases"
@@ -9,6 +10,7 @@
         :columns="court_cases_columns"
         :rowWasSelected="courtCaseSelected"
       />
+      </div>
     </div>
   </div>
 </template>

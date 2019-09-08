@@ -3,6 +3,7 @@ class Api::CourtCasesController < ApplicationController
 
   def index
     @court_cases = @context
+    @per_page_limit = 15
 
     if params[:q]
       search = "%#{params[:q]}%"

@@ -53,19 +53,13 @@
       </div>
     </section>
 
-    <section class="box padded">
-      <h1>Notices</h1>
-
-      <div class="flex row">
-        <datatable
-          v-if="court_case.id"
-          :uri="this.notices_url()"
-          tmpThing="notices"
-          :columns="notices_columns"
-          :rowWasSelected="noticeClicked" />
-      </div>
-    </section>
-
+    <datatable
+      v-if="court_case.id"
+      :uri="this.notices_url()"
+      tmpThing="notices"
+      title="Notices"
+      :columns="notices_columns"
+      :rowWasSelected="noticeClicked" />
   </div>
 </template>
 
