@@ -34,7 +34,8 @@
     <tbody>
       <tr v-for="(row,i) in this.datasource" :key="i">
         <td v-for="column in columns" :key="column.field" @click="_dataTableRowClicked($event, row)">
-          {{ row[column.field] }}
+          {{ renderField(row, column, column.field) }}
+          <span v-if="column.subField" class="subtext">{{ renderField(row, column, column.subField) }}</span>
         </td>
       </tr>
     </tbody>
@@ -134,6 +135,16 @@
 
         this.loadURI({ filter: query})
       },
+
+      renderField(row, column, field) {
+        var value = row[field]
+
+        if (column.filter) {
+          value = column.filter(value)
+        }
+
+        return value
+      }
     }
 
   }
@@ -155,6 +166,15 @@
 
     td, th {
       padding: 15px;
+      white-space: nowrap;
+
+      .subtext {
+        display: block;
+        font-size: 0.8em;
+        color: #999;
+        margin-top: 8px;
+      }
+
     }
 
     thead {
@@ -186,13 +206,16 @@
       tr {
         border-bottom: solid 1px lighten($border-color, 5%);
 
+        td:first-child {
+          width: 100%;
+        }
+
         &:hover {
           cursor: pointer;
 
           td {
             background-color: $datatable--hover-bg;
           }
-
         }
       }
     }

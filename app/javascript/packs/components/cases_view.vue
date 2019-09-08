@@ -63,11 +63,7 @@
             name: "Case Number",
             field: "case_number",
             type: "string",
-          },
-          {
-            name: "State",
-            field: "case_state",
-            type: "string"
+            subField: "case_state"
           },
           {
             name: "Last Activity",
