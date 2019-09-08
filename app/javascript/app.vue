@@ -18,6 +18,21 @@
   </div>
 </template>
 
+<style lang="scss">
+* {
+  box-sizing: border-box;
+}
+nav {
+  width: 100%;
+}
+
+nav ul {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+</style>
+
 <script>
 import CasesView from './packs/components/cases_view.vue'
 
@@ -43,7 +58,7 @@ export default {
 
     didSelectDocument(document) {
       this.$router.push({ path: document.self })
-    }
+    },
   },
 
   mounted() {},

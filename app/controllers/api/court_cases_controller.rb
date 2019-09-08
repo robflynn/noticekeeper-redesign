@@ -1,12 +1,19 @@
 class Api::CourtCasesController < ApplicationController
-  before_action :respond_with_json
+  include PaginatedResource
 
   def index
-    per_page_limit = 15
+    @court_cases = @context
 
-    @court_cases = current_user.cases.order(sort_by)
+    if params[:q]
+      search = "%#{params[:q]}%"
+      @court_cases = @court_cases.where("case_name LIKE ? OR case_number LIKE ?", search, search)
+    end
 
-    paginate @court_cases, per_page: per_page_limit
+    @court_cases = @court_cases.order(sort_by)
+
+    puts @court_cases.to_sql
+
+    paginate_resource @court_cases
   end
 
   def show
@@ -17,20 +24,8 @@ class Api::CourtCasesController < ApplicationController
 
   private
 
-  def respond_with_json
-    request.format = :json
-  end
-
-  def sort_by
-    column = "updated_at"
-    sort = {}
-    sort[column.to_sym] = sort_dir
-
-    sort
-  end
-
-  def sort_dir
-    :desc
+  def get_context
+    @context = current_user.cases
   end
 end
 

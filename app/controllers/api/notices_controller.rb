@@ -1,11 +1,19 @@
 class Api::NoticesController < ApplicationController
-  before_action :respond_with_json
-  before_action :get_context
-
-  @@per_page_limit = 100
+  include PaginatedResource
 
   def index
-    paginate @context.notices, per_page: @@per_page_limit
+    @per_page_limit = 100
+
+    @notices = @context.notices
+
+    if params[:q]
+      search = "%#{params[:q]}%"
+
+      @notices = @notices.where("title LIKE ?", search)
+    end
+
+
+    paginate_resource @notices
   end
 
   def show
@@ -24,7 +32,7 @@ class Api::NoticesController < ApplicationController
     if params[:case_id].present?
       @context = current_user.cases.find(params[:case_id])
     else
-      @@per_page_limit = 15
+      @per_page_limit = 15
 
       @context = current_user
     end

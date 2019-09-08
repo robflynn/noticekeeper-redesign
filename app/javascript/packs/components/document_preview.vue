@@ -72,7 +72,7 @@ export default {
         { responseType: 'blob' }
       )
       .then(response => {
-        this.downloadFile(response, 'test.pdf')
+        this.downloadFile(response, this.document.filename)
       })
       .catch(error => {
         console.warn(error)

@@ -1,12 +1,26 @@
 <template>
   <table class="table datatable flex-grow table-header--left">
     <thead>
+
+      <th v-bind:colspan="this.columns.length">
+        <div class="flex row">
+          <div class="search-bar flex-grow">
+            <input type="text" name="q" ref="searchbar" @keyup="_searchKeyUp" autocomplete="off" placeholder="search or filter" />
+          </div>
+
+          <!-- pagination -->
+          <div class="datatable__pagination" v-if="this.pagination.total_pages > 1">
+            Page {{ this.pagination.page }} of {{ this.pagination.total_pages }}
+
+            <button v-bind:disabled="this.pagination.links.prev == undefined" class="datatable--prev" @click="_changePage($event)" v-bind:data-uri="this.pagination.links.prev">Prev</button>
+            <button v-bind:disabled="this.pagination.links.next == undefined" class="datatable--next" @click="_changePage($event)" v-bind:data-uri="this.pagination.links.next">Next</button>
+          </div>
+          <!-- end pagination -->
+
+        </div>
+      </th>
+
       <tr v-if="this.pagination.total_pages > 1">
-        <th v-bind:colspan="this.columns.length">
-          Page {{ this.pagination.page }} of {{ this.pagination.total_pages }}
-          <button v-bind:disabled="this.pagination.links.prev == undefined" class="datatable--prev" @click="_changePage($event)" v-bind:data-uri="this.pagination.links.prev">Prev</button>
-          <button v-bind:disabled="this.pagination.links.next == undefined" class="datatable--next" @click="_changePage($event)" v-bind:data-uri="this.pagination.links.next">Next</button>
-        </th>
       </tr>
 
       <tr>
@@ -80,14 +94,22 @@
         this.loadURI()
       },
 
-      loadURI(uri = null) {
-        if (uri == null) {
-          uri = this.uri
+      loadURI(options = {}) {
+        let uri = this.uri
+        if (typeof options.uri !== 'undefined') {
+          uri = options.uri
         }
 
-        fetch(uri).then((response) => {
+        var url = uri + "?"
+
+        if (typeof options.filter !== 'undefined') {
+          url += "q=" + encodeURIComponent(options.filter)
+        }
+
+        fetch(url).then((response) => {
           return response.json()
         }).then( (data) => {
+          console.log(data)
           let datasource = data[this.tmpThing]
           let pagination = data["meta"]["pagination"]
 
@@ -98,15 +120,22 @@
       },
 
       _changePage($e) {
-        this.loadURI($e.target.dataset.uri)
+        this.loadURI({ uri: $e.target.dataset.uri })
       },
 
       _dataTableRowClicked(e, row, column) {
         if (this.rowWasSelected) {
           this.rowWasSelected(row, column)
         }
-      }
+      },
+
+      _searchKeyUp($event) {
+        let query = this.$refs.searchbar.value;
+
+        this.loadURI({ filter: query})
+      },
     }
+
   }
 </script>
 
@@ -167,5 +196,25 @@
         }
       }
     }
+
+    &__pagination {
+      padding-top: 10px;
+      margin-left: 10px;
+    }
+
+    .search-bar {
+      input {
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+        border: solid 1px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+
+        &:focus {
+          outline: solid 1px rgba(0, 0, 255, 0.2)
+        }
+      }
+    }
+
   }
 </style>

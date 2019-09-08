@@ -61,7 +61,7 @@
           },
           {
             name: "Case Number",
-            field: "case_numnber",
+            field: "case_number",
             type: "string",
           },
           {
