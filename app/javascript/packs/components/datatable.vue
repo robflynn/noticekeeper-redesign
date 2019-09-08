@@ -160,7 +160,7 @@
 
 <style lang="scss">
   .datatable {
-    $datatable--header-bg: #f2f5f7;
+    $datatable--header-bg: darken(#f2f5f7, 5%);
     $datatable--hover-bg: #ebeff7;
     $border-radius: 0.5em;
     $border-color: darken($datatable--header-bg, 6%);

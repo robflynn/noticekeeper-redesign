@@ -43,6 +43,8 @@
 
   import Datatable from './datatable'
 
+  const moment = require('moment');
+
   export default {
     components: {
       Datatable
@@ -70,7 +72,8 @@
           {
             name: "Last Activity",
             field: "updated_at",
-            type: "datetime"
+            type: "datetime",
+            filter: this._dateFilter
           }
         ]
       }
@@ -87,6 +90,10 @@
         if (this.courtCaseClicked) {
           this.courtCaseClicked(court_case)
         }
+      },
+
+      _dateFilter(value) {
+        return moment(value).format("LLL")
       },
     },
 
