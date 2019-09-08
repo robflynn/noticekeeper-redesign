@@ -4,8 +4,8 @@
       <h1>{{ court_case.case_number }} - {{ court_case.case_name }}</h1>
 
       <div>
-        <table class="metadata">
-          <tbody>
+        <MetadataTable>
+          <template slot="metadata">
             <tr>
               <th scope="col">
                 Case Number
@@ -48,8 +48,8 @@
               </th>
               <td>${{ court_case.total_claims }}</td>
             </tr>
-          </tbody>
-        </table>
+          </template>
+        </MetadataTable>
       </div>
     </section>
 

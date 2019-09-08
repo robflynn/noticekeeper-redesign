@@ -19,7 +19,7 @@
 
     <tbody>
       <tr v-for="(row,i) in this.datasource" :key="i">
-        <td v-for="column in columns" :key="column.field" @click="_dataTableRowClicked($event, row, column_key)">
+        <td v-for="column in columns" :key="column.field" @click="_dataTableRowClicked($event, row)">
           {{ row[column.field] }}
         </td>
       </tr>

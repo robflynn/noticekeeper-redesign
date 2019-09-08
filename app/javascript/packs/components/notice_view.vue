@@ -4,11 +4,8 @@
       <h1>{{ notice.title }}</h1>
 
       <div>
-
-        <!-- metadata table -->
-        <!-- TODO: Make me a component -->
-        <table class="metadata">
-          <tbody>
+        <MetadataTable>
+          <template slot="metadata">
             <tr>
               <th scope="col">
                 Case Name
@@ -46,8 +43,8 @@
                 {{ notice.body }}
               </td>
             </tr>
-          </tbody>
-        </table>
+          </template>
+        </MetadataTable>
       </div>
     </section>
 

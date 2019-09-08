@@ -26,8 +26,12 @@ Vue.use(Router)
 import DataTable from './components/datatable'
 import DataTableHeaderCell from './components/datatable_header_cell'
 
+import MetadataTable from './components/metadata_table'
+
 Vue.component('datatable', DataTable)
 Vue.component('datatable-header-cell', DataTableHeaderCell)
+
+Vue.component('MetadataTable', MetadataTable)
 
 const router = new Router({ routes })
 
