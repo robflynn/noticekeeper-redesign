@@ -1,5 +1,5 @@
 <template>
-  <table class="metadata">
+  <table class="metadata metadata--no-margin">
     <slot name="metadata" />
   </table>
 </template>
@@ -11,7 +11,20 @@
     margin: 10px;
 
     &--no-margin {
-      margin: 0px;
+      margin: 0;
+
+      tr {
+        th:first-child,
+        td:first-child {
+          border-left: solid 1px transparent;
+        }
+
+        th:last-child,
+        td:last-child {
+          border-right: solid 1px transparent;
+        }
+      }
+
     }
 
     th, td {

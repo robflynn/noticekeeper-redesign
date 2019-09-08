@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="box">
+    <section class="box box--no-pad">
       <h1>{{ notice.title }}</h1>
 
       <div>
@@ -118,7 +118,7 @@
 </script>
 
 <style lang="scss">
-  @import "../../stylesheets/global_workaround.scss";
+  @import "../../stylesheets/theme.scss";
 
   .document-list {
     display: flex;

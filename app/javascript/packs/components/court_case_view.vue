@@ -70,7 +70,7 @@
 </template>
 
 <style lang="scss">
-  @import "../../stylesheets/global_workaround.scss";
+  @import "../../stylesheets/theme.scss";
 </style>
 
 <script>

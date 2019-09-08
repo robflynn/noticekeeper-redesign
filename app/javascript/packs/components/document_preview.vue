@@ -9,6 +9,8 @@
 </template>
 
 <style lang="scss">
+  @import "../../stylesheets/theme.scss";
+
   .nk-button {
     background: #eee;
     border-radius: 5px;
