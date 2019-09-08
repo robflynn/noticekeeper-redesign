@@ -3,7 +3,7 @@
     <div class="flex col">
       <img class="document-preview__thumbnail" v-bind:src="document.thumbnail_url" @click="_documentPreviewClicked($event)" />
 
-      <button class="nk-button document-preview__download"><i class="fas fa-file-pdf"></i> Download</button>
+      <button class="nk-button document-preview__download" @click.prevent="_downloadClicked">Download</button>
     </div>
   </div>
 </template>
@@ -44,16 +44,69 @@
 <script>
 export default {
   name: 'document-preview',
+
   props: {
-    document: Object,
+    document: {
+      type: Object,
+      required: true
+    },
+
     documentPreviewSelected: Function
   },
+
   methods: {
     _documentPreviewClicked(e) {
       if (this.documentPreviewSelected) {
         this.documentPreviewSelected(this.document)
       }
-    }
+    },
+
+    _downloadClicked($e) {
+      console.log(this.document.pdf_url)
+
+      this.downloadPDF()
+    },
+
+    downloadPDF() {
+      this.$http.get(this.document.pdf_url,
+        { responseType: 'blob' }
+      )
+      .then(response => {
+        this.downloadFile(response, 'test.pdf')
+      })
+      .catch(error => {
+        console.warn(error)
+        console.log("download error")
+      })
+    },
+
+    downloadFile(response, filename) {
+      // It is necessary to create a new blob object with mime-type explicitly set
+      // otherwise only Chrome works like it should
+      var newBlob = new Blob([response.data], { type: 'application/pdf' })
+
+      console.log(newBlob)
+
+      // IE doesn't allow using a blob object directly as link href
+      // instead it is necessary to use msSaveOrOpenBlob
+      if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        window.navigator.msSaveOrOpenBlob(newBlob)
+        return
+      }
+
+      // For other browsers:
+      // Create a link pointing to the ObjectURL containing the blob.
+      const data = window.URL.createObjectURL(newBlob)
+      var link = document.createElement('a')
+      link.href = data
+      link.download = filename + '.pdf'
+      link.click()
+
+      setTimeout(function () {
+        // For Firefox it is necessary to delay revoking the ObjectURL
+        window.URL.revokeObjectURL(data)
+      }, 100)
+    },
   }
 
 }

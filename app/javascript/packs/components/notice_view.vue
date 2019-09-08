@@ -62,7 +62,6 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
   import DocumentPreview from './document_preview'
 
   let dummyNotice = {

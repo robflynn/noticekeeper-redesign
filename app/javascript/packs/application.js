@@ -20,6 +20,10 @@ import { store } from './store'
 
 import routes from './routes'
 
+import axios from 'axios'
+
+Vue.prototype.$http = axios
+
 Vue.use(Vuex)
 Vue.use(Router)
 
