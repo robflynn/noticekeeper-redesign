@@ -89,10 +89,18 @@
       return {
         court_case: dummyCase,
         notices: [],
-        notices_columns: {
-          'Title': 'title',
-          'Received': 'updated_at'
-        }
+        notices_columns: [
+          {
+            name: "Title",
+            type: "string",
+            field: "title"
+          },
+          {
+            name: "Received",
+            type: "datetime",
+            field: "updated_at"
+          }
+        ]
       }
     },
 

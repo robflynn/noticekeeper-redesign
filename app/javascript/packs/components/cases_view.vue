@@ -53,14 +53,31 @@
     },
     data: function() {
       return {
-        court_cases_columns: {
-          'Name': 'case_name',
-          'Case Number': 'case_number',
-          'State': 'case_state',
-          'Last Activity': 'updated_at'
-        }
+        court_cases_columns: [
+          {
+            name: "Case Name",
+            field: "case_name",
+            type: "string",
+          },
+          {
+            name: "Case Number",
+            field: "case_numnber",
+            type: "string",
+          },
+          {
+            name: "State",
+            field: "case_state",
+            type: "string"
+          },
+          {
+            name: "Last Activity",
+            field: "updated_at",
+            type: "datetime"
+          }
+        ]
       }
     },
+
     methods: {
       setCourtCases(court_cases) {
         this.court_cases = court_cases
@@ -74,6 +91,7 @@
         }
       },
     },
+
     mounted() {
       Noticekeeper.getCourtCases()
                   .then((response) => {

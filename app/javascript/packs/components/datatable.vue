@@ -2,7 +2,7 @@
   <table class="table datatable flex-grow table-header--left">
     <thead>
       <tr v-if="this.pagination.total_pages > 1">
-        <th v-bind:colspan="Object.keys(this.columns).length">
+        <th v-bind:colspan="this.columns.length">
           Page {{ this.pagination.page }} of {{ this.pagination.total_pages }}
           <button v-bind:disabled="this.pagination.links.prev == undefined" class="datatable--prev" @click="_changePage($event)" v-bind:data-uri="this.pagination.links.prev">Prev</button>
           <button v-bind:disabled="this.pagination.links.next == undefined" class="datatable--next" @click="_changePage($event)" v-bind:data-uri="this.pagination.links.next">Next</button>
@@ -11,16 +11,16 @@
 
       <tr>
         <datatable-header-cell
-          v-for="(column, i) in columns"
-          :key="i"
-          :column="i" />
+          v-for="column in columns"
+          :key="column.field"
+          :column="column.name" />
       </tr>
     </thead>
 
     <tbody>
       <tr v-for="(row,i) in this.datasource" :key="i">
-        <td v-for="column_key in columns" :key="column_key" @click="_dataTableRowClicked($event, row, column_key)">
-          {{ row[column_key] }}
+        <td v-for="column in columns" :key="column.field" @click="_dataTableRowClicked($event, row, column_key)">
+          {{ row[column.field] }}
         </td>
       </tr>
     </tbody>
@@ -35,7 +35,7 @@
        * Column header labels and value associations
        */
       columns: {
-        type: Object,
+        type: Array,
         required: true,
         default: [],
       },
@@ -61,7 +61,7 @@
       }
     },
 
-    mounted() {
+    beforeMount() {
       this.init()
     },
 
@@ -111,5 +111,61 @@
 </script>
 
 <style lang="scss">
-  @import "../../stylesheets/global_workaround.scss";
+  .datatable {
+    $datatable--header-bg: #f2f5f7;
+    $datatable--hover-bg: #ebeff7;
+    $border-radius: 0.5em;
+    $border-color: darken($datatable--header-bg, 6%);
+
+    border-collapse: collapse;
+
+    margin: 10px;
+    border-radius: $border-radius;
+    border-style: hidden;
+    box-shadow: 0 0 0 1px $border-color;
+
+    td, th {
+      padding: 15px;
+    }
+
+    thead {
+      background: $datatable--header-bg;
+
+      color: #444;
+      font-weight: 800;
+      text-align: left;
+      border-radius: 10px;
+
+      tr:first-child {
+        th:first-child {
+          border-top-left-radius: $border-radius;
+        }
+
+        th:last-child {
+          border-top-right-radius: $border-radius;
+        }
+      }
+
+      tr:last-child {
+        th {
+          border-bottom: solid 1px $border-color;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: solid 1px lighten($border-color, 5%);
+
+        &:hover {
+          cursor: pointer;
+
+          td {
+            background-color: $datatable--hover-bg;
+          }
+
+        }
+      }
+    }
+  }
 </style>
