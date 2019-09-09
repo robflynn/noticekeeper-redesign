@@ -1,46 +1,36 @@
 <template>
-  <div class="noticekeeper">
+  <div class="noticekeeper" data-theme="noticekeeper">
+    <header>
+      <NavBar />
+    </header>
+    <main role="main">
 
-    <nav>
-      <ul>
-        <li><router-link to='/'>Cases</router-link></li>
-        <li>Events</li>
-        <li>Account</li>
-      </ul>
-    </nav>
+      <router-view
+        @didSelectCourtCase="didSelectCourtCase"
+        @didSelectNotice="didSelectNotice"
+        @didSelectDocument="didSelectDocument"
+      />
 
-    <router-view
-      @didSelectCourtCase="didSelectCourtCase"
-      @didSelectNotice="didSelectNotice"
-      @didSelectDocument="didSelectDocument"
-    />
-
+    </main>
   </div>
 </template>
 
 <style lang="scss">
-* {
-  box-sizing: border-box;
-}
-nav {
-  width: 100%;
-}
-
-nav ul {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-}
+  body {
+    background: var(--nk-background-color);
+  }
 </style>
 
 <script>
 import CasesView from './packs/components/cases_view.vue'
+import NavBar from './packs/components/navbar.vue'
 
 import { mapGetters, mapMutations, mapState } from "vuex";
 
 export default {
   components: {
-    'cases-view': CasesView
+    'cases-view': CasesView,
+    'NavBar': NavBar,
   },
 
   computed: {},

@@ -1,18 +1,17 @@
-:root {
-  --main-button-color: coral;
-}
 
-body {
-  background: #f0f2f4;
-}
+[data-theme] {
+  // helpers for allowing setting csss variables in hsl
+  $neutral-background: hsl(220, 2, 96);
 
-nav {
-  ul {
-    li {
-      display: inline-block;
-      padding: 0.5em;
-    }
-  }
+
+  // base colors
+  --neutral-background: #{$neutral-background};
+
+
+  // base styles
+  --nk-background-color: var(--neutral-background);
+  --nk-navbar-color: #ccc;
+  --nk-navbar-text-color: #444;
 }
 
 .flex {
