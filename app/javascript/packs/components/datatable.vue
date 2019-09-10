@@ -206,6 +206,8 @@
     $border-radius: 0.5em;
     $border-color: darken($datatable--header-bg, 6%);
 
+    user-select: none;
+
     border-collapse: collapse;
 
     margin: 10px;
