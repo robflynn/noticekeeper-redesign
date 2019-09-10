@@ -29,6 +29,10 @@
   &.grow {
     flex: 1;
   }
+
+  &.between {
+    justify-content: space-between;
+  }
 }
 
 .flex-grow {
