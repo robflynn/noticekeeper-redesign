@@ -12,6 +12,7 @@ class Api::NoticesController < ApplicationController
       @notices = @notices.where("title LIKE ?", search)
     end
 
+    @notices = @notices.order(sort_by)
 
     paginate_resource @notices
   end
