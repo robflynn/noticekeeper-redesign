@@ -48,6 +48,8 @@
 </template>
 
 <script>
+  var URI = require('urijs');
+
   export default {
     props: {
       /**
@@ -104,18 +106,19 @@
       },
 
       loadURI(options = {}) {
-        let uri = this.uri
+        var uri = this.uri
+
         if (typeof options.uri !== 'undefined') {
           uri = options.uri
         }
 
-        var url = uri + "?"
+        uri = URI(uri)
 
         if (typeof options.filter !== 'undefined') {
-          url += "q=" + encodeURIComponent(options.filter)
+          uri.addQuery("q", options.filter)
         }
 
-        fetch(url).then((response) => {
+        fetch(uri).then((response) => {
           return response.json()
         }).then( (data) => {
           console.log(data)
