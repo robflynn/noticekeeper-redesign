@@ -27,11 +27,16 @@
         </th>
       </tr>
 
-      <tr>
-        <datatable-header-cell
-          v-for="column in columns"
-          :key="column.field"
-          :column="column.name" />
+      <tr class="datatable__headers">
+        <th v-for="column in columns" :key="column.field" @click="_columnClicked(column)" v-bind:data-column-name="column.field">
+          <div class="flex row between">
+            <div>{{ column.name }}</div>
+
+            <span v-if="column.field != sortedColumn" class="sort fa fa-sort" />
+            <span v-if="column.field == sortedColumn && sortDirection == 'asc'" class="sort fa fa-sort-up" />
+            <span v-if="column.field == sortedColumn && sortDirection == 'desc'" class="sort fa fa-sort-down" />
+          </div>
+        </th>
       </tr>
     </thead>
 
@@ -104,6 +109,9 @@
     methods: {
       init() {
         this.loadURI()
+
+        this.sortedColumn = null
+        this.sortDirection = "desc"
       },
 
       loadURI(options = {}) {
@@ -117,6 +125,11 @@
 
         if (typeof options.filter !== 'undefined') {
           uri.addQuery("q", options.filter)
+        }
+
+        if (this.sortedColumn && this.sortDirection) {
+          uri.addQuery("sort_by", this.sortedColumn)
+          uri.addQuery("sort_dir", this.sortDirection)
         }
 
         fetch(uri).then((response) => {
@@ -145,6 +158,25 @@
         let query = this.$refs.searchbar.value;
 
         this.loadURI({ filter: query})
+      },
+
+      _columnClicked(column) {
+
+        // If the sorted column is the same as the
+        // clicked column toggle the sort order
+        if (this.sortedColumn == column.field) {
+          this._toggleSortOrder()
+        } else {
+          this.sortDirection = "asc"
+        }
+
+        this.sortedColumn = column.field
+
+        this.loadURI()
+      },
+
+      _toggleSortOrder() {
+        this.sortDirection = this.sortDirection == "asc" ? "desc" : "asc"
       },
 
       renderField(row, column, field) {
@@ -182,6 +214,8 @@
     box-shadow: 0 0 0 1px $border-color;
 
     background: #fff;
+
+    width: 100%;
 
     td, th {
       padding: 15px;
@@ -247,6 +281,20 @@
     &__title {
       font-size: 1.2em;
       margin-bottom: 0;
+    }
+
+    &__headers {
+      .sort {
+        display: block;
+        margin-left: 15px;
+      }
+
+      th {
+        &:hover {
+          background: red;
+          cursor: pointer;
+        }
+      }
     }
 
     .search-bar {

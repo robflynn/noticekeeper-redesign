@@ -14,7 +14,7 @@ module PaginatedResource
     end
 
     def sort_by
-      column = "updated_at"
+      column = params[:sort_by] || "updated_at"
       sort = {}
       sort[column.to_sym] = sort_dir
 
@@ -22,7 +22,7 @@ module PaginatedResource
     end
 
     def sort_dir
-      :desc
+      params[:sort_dir] || :desc
     end
 
     def paginate_resource(resource)
