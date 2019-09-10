@@ -49,6 +49,7 @@
 
 <script>
   var URI = require('urijs');
+  const moment = require('moment')
 
   export default {
     props: {
@@ -96,7 +97,7 @@
         pagination: {
           links: {
           }
-        }
+        },
       }
     },
 
@@ -128,7 +129,6 @@
           this.datasource = datasource
           this.pagination = pagination
         })
-
       },
 
       _changePage($e) {
@@ -150,12 +150,18 @@
       renderField(row, column, field) {
         var value = row[field]
 
+        // If the user specified a filter we should use that
         if (column.filter) {
           value = column.filter(value)
+        } else {
+          // Otherwise, we should use our in-built filter
+          if (column.type == "datetime") {
+           return moment(value).format("LLL")
+          }
         }
 
         return value
-      }
+      },
     }
 
   }

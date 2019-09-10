@@ -67,13 +67,12 @@
             name: "Case Number",
             field: "case_number",
             type: "string",
-            subField: "case_state"
+            subField: "case_state",
           },
           {
             name: "Last Activity",
             field: "updated_at",
             type: "datetime",
-            filter: this._dateFilter
           }
         ]
       }
@@ -90,10 +89,6 @@
         if (this.courtCaseClicked) {
           this.courtCaseClicked(court_case)
         }
-      },
-
-      _dateFilter(value) {
-        return moment(value).format("LLL")
       },
     },
 
