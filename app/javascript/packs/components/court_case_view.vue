@@ -34,7 +34,7 @@
               <th scope="col">
                 Total Claim Amount
               </th>
-              <td>${{ court_case.total_claims }}</td>
+              <td>{{ this.$currency.format(court_case.total_claims / 100, { locale: 'en-US' }) }}</td>
             </tr>
           </template>
         </MetadataTable>
@@ -47,7 +47,7 @@
       tmpThing="claims"
       title="Claims"
       :columns="claims_columns"
-      perPage="5"
+      :perPage=5
     />
 
     <datatable
@@ -56,7 +56,7 @@
       tmpThing="notices"
       title="Notices"
       :columns="notices_columns"
-      perPage="5"
+      :perPage=5
       :rowWasSelected="noticeClicked" />
   </div>
 </template>

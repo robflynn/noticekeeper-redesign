@@ -8,6 +8,8 @@
 // layout file, like app/views/layouts/application.html.erb
 import Noticekeeper from './noticekeeper'
 
+const currencyFormatter = require('currency-formatter')
+
 import TurbolinksAdapter from 'vue-turbolinks'
 import Vue from 'vue/dist/vue.esm'
 import Vuex from 'vuex'
@@ -23,6 +25,7 @@ import routes from './routes'
 import axios from 'axios'
 
 Vue.prototype.$http = axios
+Vue.prototype.$currency = currencyFormatter
 
 Vue.use(Vuex)
 Vue.use(Router)

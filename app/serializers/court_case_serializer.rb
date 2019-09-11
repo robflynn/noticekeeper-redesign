@@ -22,5 +22,9 @@ class CourtCaseSerializer < ActiveModel::Serializer
 
   attributes :id, :case_name, :case_number,
              :case_state, :created_at,
-             :updated_at
+             :updated_at, :total_claims
+
+  def total_claims
+    object.claims.map(&:amount).sum
+  end
 end
