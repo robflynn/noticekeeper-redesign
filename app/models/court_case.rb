@@ -22,6 +22,7 @@ class CourtCase < ApplicationRecord
 
   has_many :notices, foreign_key: 'client_id'
   has_many :claims, through: :notices
+  has_many :events, through: :notices
 
   enum status: { active: "active", inactive: "inactive" }
 end
