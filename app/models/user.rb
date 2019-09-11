@@ -10,4 +10,8 @@ class User
   def claims
     Claim.all
   end
+
+  def events
+    Event.all
+  end
 end

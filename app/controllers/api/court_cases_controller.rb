@@ -2,25 +2,27 @@ class Api::CourtCasesController < ApplicationController
   include PaginatedResource
 
   def index
-    @court_cases = @context
+    @resource = @context
+    @resource = @resource.includes(:claims)
+
     @per_page_limit = 15
 
     if params[:q]
       search = "%#{params[:q]}%"
-      @court_cases = @court_cases.where("case_name LIKE ? OR case_number LIKE ?", search, search)
+      @resource = @resource.where("case_name LIKE ? OR case_number LIKE ?", search, search)
     end
 
-    @court_cases = @court_cases.order(sort_by)
+    @resource = @resource.order(sort_by)
 
-    puts @court_cases.to_sql
+    puts @resource.to_sql
 
-    paginate_resource @court_cases
+    paginate_resource @resource
   end
 
   def show
-    @court_case = CourtCase.find(params[:id])
+    @resource = CourtCase.find(params[:id])
 
-    render json: @court_case
+    render json: @resource
   end
 
   private

@@ -31,7 +31,7 @@
             v-bind:style="{ width: column.width, 'min-width': column.minWidth }"
           >
           <div class="flex row between">
-            <div>{{ column.name }}</div>
+            <div>{{ column.name || column.field }}</div>
 
             <span v-if="column.field != sortedColumn" class="sort fa fa-sort" />
             <span v-if="column.field == sortedColumn && sortDirection == 'asc'" class="sort fa fa-sort-up" />

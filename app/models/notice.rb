@@ -28,6 +28,7 @@ class Notice < ApplicationRecord
 
   has_many :documents
   has_many :claims
+  has_many :events
 
   def amended_version
     Notice.find_by(

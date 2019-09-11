@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get 'design', to: 'pages#design'
 
   namespace :api do
-    resources :notices, only: [:index, :show]
+    resources :notices, only: [:index, :show] do
+      resources :events, only: [:index, :show]
+    end
 
     resources :cases, only: [:index, :show], controller: 'court_cases' do
       resources :claims, only: [:index, :show]

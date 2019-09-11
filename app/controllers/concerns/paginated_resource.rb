@@ -7,6 +7,7 @@ module PaginatedResource
   included do
     before_action :respond_with_json
     before_action :get_context
+    before_action :get_resource
 
     private
 
@@ -28,6 +29,12 @@ module PaginatedResource
 
     def paginate_resource(resource)
       paginate resource, per_page: @per_page_limit
+    end
+
+    def get_context
+    end
+
+    def get_resource
     end
 
   end

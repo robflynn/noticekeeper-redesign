@@ -57,7 +57,6 @@
 
     <section class="box">
       <h1>Documents | Upload</h1>
-
       <div>
         <div class="document-list">
           <DocumentPreview v-for="document in documents" :key="document.id" :document="document" :documentPreviewSelected="_documentClicked" />
@@ -65,6 +64,11 @@
       </div>
     </section>
 
+    <datatable
+      tmpThing="events"
+      :columns="events_columns"
+      :uri="notice.associated.events"
+    />
   </div>
 </template>
 
@@ -91,7 +95,30 @@
       return {
         notice: dummyNotice,
         courtCase: dummyCase,
-        documents: []
+        documents: [],
+
+        events_columns: [
+          {
+            field: "date",
+            name: "Date",
+            width: "125px"
+          },
+          {
+            field: "time",
+            name: "Time",
+            width: "125px"
+          },
+          {
+            field: "court_case",
+            name: "Case",
+            filter: this._caseFilter,
+            width: "150px"
+          },
+          {
+            field: "description",
+            name: "Description"
+          }
+        ]
       }
     },
 
@@ -111,6 +138,10 @@
         let url = this.amended_notice_url()
 
         this.$router.push({ name: 'court_case_notice_show', params: { case_id: this.courtCase.id, id: this.notice.amended.notice_id } })
+      },
+
+      _caseFilter(row, column, value) {
+        return value.case_number
       },
 
       init(case_id, notice_id) {

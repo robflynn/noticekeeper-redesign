@@ -26,7 +26,7 @@ class NoticeSerializer < ActiveModel::Serializer
 
   attributes :id, :case_id, :title, :notice_type, :status, :amended, :body
   attributes :document_number, :document_url
-  attributes :created_at, :updated_at
+  attributes :created_at, :updated_at, :associated
 
   def amended
     object.amended ? { notice_id: object.amended_version.id } : false
@@ -34,5 +34,11 @@ class NoticeSerializer < ActiveModel::Serializer
 
   def case_id
     object.client_id
+  end
+
+  def associated
+    {
+      events: api_notice_events_path(object.id)
+    }
   end
 end
