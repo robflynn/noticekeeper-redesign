@@ -1,5 +1,12 @@
 <template>
   <div>
+
+    <div v-if="notice.amended" class="alert alert--note">
+      NOTE: This notice has been superceded by an
+
+      <a :href="amended_notice_url()" @click.prevent="_amendmentClicked">amendment</a>.
+    </div>
+
     <section class="box box--no-pad">
       <h1>{{ notice.title }}</h1>
 
@@ -89,35 +96,68 @@
     },
 
     methods: {
+      amended_notice_url() {
+        return `/cases/${this.courtCase.id}/notices/${this.notice.amended.notice_id}`
+      },
+
       _documentClicked(document) {
         //court_case_notice_document_show
         console.log(document)
 
         this.$emit('didSelectDocument', document)
-      }
+      },
+
+      _amendmentClicked() {
+        let url = this.amended_notice_url()
+
+        this.$router.push({ name: 'court_case_notice_show', params: { case_id: this.courtCase.id, id: this.notice.amended.notice_id } })
+      },
+
+      init(case_id, notice_id) {
+        Noticekeeper.getNotice(case_id, notice_id).then((response) => {
+          this.notice = response
+        })
+
+        Noticekeeper.getCourtCase(case_id).then((response) => {
+          this.courtCase = response
+        })
+
+        Noticekeeper.getDocuments(case_id, notice_id).then((response) => {
+          this.documents = response
+        })
+      },
+
+    },
+
+    beforeRouteUpdate(to, from, next) {
+      this.init(to.params.case_id, to.params.id)
+
+      next()
     },
 
     mounted() {
       let case_id = this.$route.params.case_id
       let notice_id = this.$route.params.id
 
-      Noticekeeper.getNotice(case_id, notice_id).then((response) => {
-        this.notice = response
-      })
-
-      Noticekeeper.getCourtCase(case_id).then((response) => {
-        this.courtCase = response
-      })
-
-      Noticekeeper.getDocuments(case_id, notice_id).then((response) => {
-        this.documents = response
-      })
+      this.init(case_id, notice_id)
     }
   }
 </script>
 
 <style lang="scss">
   @import "../../stylesheets/theme.scss";
+
+  .alert {
+    background: #ccc;
+    border: #888;
+    padding: 10px;
+    border: solid 2px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+
+    &--note {
+      background: #ffffcc;
+    }
+  }
 
   .document-list {
     display: flex;

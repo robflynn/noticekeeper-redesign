@@ -7,6 +7,7 @@ import NoticesView from './components/notices_view.vue'
 const routes = [
   { path: '/', component: CasesView, name: 'court_cases_index' },
   { path: '/notices', component: NoticesView, name: 'notices_index' },
+  { path: '/notices/:id', component: NoticeView, name: 'notice_show' },
   { path: '/cases/:slug', component: CourtCaseView, name: 'court_case_show' },
   { path: '/cases/:case_id/notices/:id', component: NoticeView, name: 'court_case_notice_show' },
   { path: '/cases/:case_id/notices/:notice_id/documents/:id', component: DocumentView, name: 'court_case_notice_document_show' },

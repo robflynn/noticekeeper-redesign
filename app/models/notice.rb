@@ -22,10 +22,19 @@
 #
 
 class Notice < ApplicationRecord
-    enum notice_type: { claim: "claim", document: "document" }
+  enum notice_type: { claim: "claim", document: "document" }
 
-    belongs_to :court_case, foreign_key: 'client_id'
+  belongs_to :court_case, foreign_key: 'client_id'
 
-    has_many :documents
-    has_many :claims
+  has_many :documents
+  has_many :claims
+
+  def amended_version
+    Notice.find_by(
+      notice_type: self.notice_type,
+      client_id: self.client_id,
+      document_number: self.document_number,
+      amended: false
+    )
+  end
 end

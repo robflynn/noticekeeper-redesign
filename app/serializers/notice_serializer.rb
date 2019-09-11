@@ -28,6 +28,10 @@ class NoticeSerializer < ActiveModel::Serializer
   attributes :document_number, :document_url
   attributes :created_at, :updated_at
 
+  def amended
+    object.amended ? { notice_id: object.amended_version.id } : false
+  end
+
   def case_id
     object.client_id
   end
