@@ -6,4 +6,8 @@ class User
   def notices
     Notice.all
   end
+
+  def claims
+    Claim.all
+  end
 end

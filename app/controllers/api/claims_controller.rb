@@ -1,28 +1,23 @@
-class Api::NoticesController < ApplicationController
+class Api::ClaimsController < ApplicationController
   include PaginatedResource
 
-  @@filter_column = "title"
+  @@filter_column = "amount"
 
   def index
-    @notices = @context.notices
+    @claims = @context.claims
 
     if @@filter_column
       if params[:q]
         search = "%#{params[:q]}%"
 
-        @notices = @notices.where("#{@@filter_column} LIKE ?", search)
+        @claims = @claims.where("#{@@filter_column} LIKE ?", search)
       end
     end
 
-    @notices = @notices.order(sort_by)
+    @claims = @claims.order(sort_by)
 
-    paginate_resource @notices
-  end
 
-  def show
-    @notice = @context.notices.find(params[:id])
-
-    render json: @notice
+    paginate_resource @claims
   end
 
   private

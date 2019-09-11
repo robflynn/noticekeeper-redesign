@@ -1,15 +1,11 @@
 <template>
   <table class="table datatable flex-grow table-header--left">
     <thead>
-      <tr v-if="title" class="datatable__titlerow">
-        <th v-bind:colspan="this.columns.length">
-          <span class="datatable__title">{{ title }}</span>
-        </th>
-      </tr>
-
       <tr>
         <th v-bind:colspan="this.columns.length">
           <div class="flex row">
+            <span v-if="title" class="datatable__title">{{ title }}</span>
+
             <div class="search-bar flex-grow">
               <input type="text" name="q" ref="searchbar" @keyup="_searchKeyUp" autocomplete="off" placeholder="search or filter" />
             </div>
@@ -47,7 +43,7 @@
 
     <tbody>
       <tr v-for="(row,i) in this.datasource" :key="i">
-        <td v-for="column in columns" :key="column.field" @click="_dataTableRowClicked($event, row)">
+        <td v-for="column in columns" :key="column.field" @click="_dataTableRowClicked($event, row)" v-bind:data-column-type="column.type">
           {{ renderField(row, column, column.field) }}
           <span v-if="column.subField" class="subtext">{{ renderField(row, column, column.subField) }}</span>
         </td>
@@ -60,6 +56,7 @@
 <script>
   var URI = require('urijs');
   const moment = require('moment')
+  const currencyFormatter = require('currency-formatter')
 
   export default {
     props: {
@@ -195,6 +192,10 @@
           if (column.type == "datetime") {
            return moment(value).format("LLL")
           }
+
+          if (column.type == "currency") {
+            return currencyFormatter.format(value / 100, { locale: 'en-US' })
+          }
         }
 
         return value
@@ -266,6 +267,14 @@
       tr {
         border-bottom: solid 1px lighten($border-color, 5%);
 
+        td {
+          padding-right: 30px;
+        }
+
+        td[data-column-type="currency"] {
+          text-align: right;
+        }
+
         &:hover {
           cursor: pointer;
 
@@ -284,6 +293,8 @@
     &__title {
       font-size: 1.2em;
       margin-bottom: 0;
+      margin-top: 10px;
+      margin-right: 25px;
     }
 
     &__headers {
@@ -305,8 +316,8 @@
         width: 100%;
         padding: 10px;
         font-size: 1em;
-        border: solid 1px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
+        border-radius: 8px;
+        border: none;
 
         &:focus {
           outline: solid 1px rgba(0, 0, 255, 0.2)

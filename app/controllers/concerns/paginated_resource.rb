@@ -1,11 +1,12 @@
 module PaginatedResource
   extend ActiveSupport::Concern
 
+  @@filter_column = "title"
+  @@per_page_limit = 15
+
   included do
     before_action :respond_with_json
     before_action :get_context
-
-    @per_page_limit = 15
 
     private
 

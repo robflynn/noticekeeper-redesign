@@ -26,18 +26,6 @@
             </tr>
             <tr>
               <th scope="col">
-                Status
-              </th>
-              <td>{{ court_case.status }}</td>
-            </tr>
-            <tr>
-              <th scope="col">
-                Chapter
-              </th>
-              <td></td>
-            </tr>
-            <tr>
-              <th scope="col">
                 State
               </th>
               <td>{{ court_case.case_state }}</td>
@@ -52,6 +40,14 @@
         </MetadataTable>
       </div>
     </section>
+
+    <datatable
+      v-if="court_case.id"
+      :uri="this.claims_url()"
+      tmpThing="claims"
+      title="Claims"
+      :columns="claims_columns"
+    />
 
     <datatable
       v-if="court_case.id"
@@ -82,7 +78,9 @@
     data: function() {
       return {
         court_case: dummyCase,
+
         notices: [],
+
         notices_columns: [
           {
             name: "Title",
@@ -92,7 +90,27 @@
           {
             name: "Received",
             type: "datetime",
-            field: "updated_at"
+            field: "updated_at",
+            width: "250px"
+          }
+        ],
+
+        claims_columns: [
+          {
+            name: "Creditor",
+            field: "creditor_id",
+          },
+          {
+            name: "Amount",
+            type: "currency",
+            field: "amount",
+            width: "120px"
+          },
+          {
+            name: "Received",
+            field: "created_at",
+            type: "datetime",
+            width: "250px",
           }
         ]
       }
@@ -104,8 +122,15 @@
           return ""
         }
 
-      console.log(this.court_case)
         return `/api/cases/${this.court_case.id}/notices`
+      },
+
+      claims_url() {
+        if (this.court_case == undefined) {
+          return ""
+        }
+
+        return `/api/cases/${this.court_case.id}/claims`
       },
 
       noticeClicked(notice) {

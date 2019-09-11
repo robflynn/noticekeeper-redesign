@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :notices, only: [:index, :show]
 
     resources :cases, only: [:index, :show], controller: 'court_cases' do
+      resources :claims, only: [:index, :show]
+
       resources :notices, only: [:index, :show] do
         resources :documents, only: [:index, :show]
       end
