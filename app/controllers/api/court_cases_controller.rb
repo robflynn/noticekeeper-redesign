@@ -1,10 +1,13 @@
 class Api::CourtCasesController < ApplicationController
   include PaginatedResource
 
-  @@filter_column = "case_name"
-  @@included_resources = [:claims]
+  def filter_column
+    "case_name"
+  end
 
-  private
+  def included_resources
+    [:claims]
+  end
 
   def get_context
     @context = current_account.cases

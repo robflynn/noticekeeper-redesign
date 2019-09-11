@@ -3,6 +3,8 @@
     <div class="flex col">
       <img class="document-preview__thumbnail" v-bind:src="document.thumbnail_url" @click="_documentPreviewClicked($event)" />
 
+      <span class="document-preview__meta">{{ documentPageCountLabel }}</span>
+
       <button class="nk-button document-preview__download" @click.prevent="_downloadClicked">Download</button>
     </div>
   </div>
@@ -38,10 +40,20 @@
 
       box-shadow: 0px 0px 2.5px rgba(0, 0,0, 0.05)
     }
+
+    &__meta {
+      color: #444;
+      text-align: center;
+      font-weight: bold;
+      font-size: 0.8em;
+      margin-bottom: 0.5em;
+    }
   }
 </style>
 
 <script>
+const pluralize = require('pluralize')
+
 export default {
   name: 'document-preview',
 
@@ -52,6 +64,12 @@ export default {
     },
 
     documentPreviewSelected: Function
+  },
+
+  computed: {
+    documentPageCountLabel() {
+      return `${this.document.pages} ${pluralize('Page', this.document.pages)}`
+    }
   },
 
   methods: {
