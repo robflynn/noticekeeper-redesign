@@ -28,7 +28,12 @@
       </tr>
 
       <tr class="datatable__headers">
-        <th v-for="column in columns" :key="column.field" @click="_columnClicked(column)" v-bind:data-column-name="column.field">
+        <th v-for="column in columns"
+            :key="column.field"
+            @click="_columnClicked(column)"
+            v-bind:data-column-name="column.field"
+            v-bind:style="{ width: column.width, 'min-width': column.minWidth }"
+          >
           <div class="flex row between">
             <div>{{ column.name }}</div>
 
@@ -42,7 +47,7 @@
 
     <tbody>
       <tr v-for="(row,i) in this.datasource" :key="i">
-        <td v-for="column in columns" :key="column.field" @click="_dataTableRowClicked($event, row)" v-bind:style="{ width: column.width, 'min-width': column.minWidth }">
+        <td v-for="column in columns" :key="column.field" @click="_dataTableRowClicked($event, row)">
           {{ renderField(row, column, column.field) }}
           <span v-if="column.subField" class="subtext">{{ renderField(row, column, column.subField) }}</span>
         </td>
