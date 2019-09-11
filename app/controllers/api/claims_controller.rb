@@ -5,6 +5,7 @@ class Api::ClaimsController < ApplicationController
 
   def index
     @claims = @context.claims
+    @claims = @claims.includes(:creditor)
 
     if @@filter_column
       if params[:q]

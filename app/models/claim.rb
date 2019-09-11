@@ -19,4 +19,6 @@
 
 class Claim < ApplicationRecord
   belongs_to :notice
+
+  belongs_to :creditor
 end

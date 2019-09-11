@@ -47,6 +47,7 @@
       tmpThing="claims"
       title="Claims"
       :columns="claims_columns"
+      perPage="5"
     />
 
     <datatable
@@ -55,6 +56,7 @@
       tmpThing="notices"
       title="Notices"
       :columns="notices_columns"
+      perPage="5"
       :rowWasSelected="noticeClicked" />
   </div>
 </template>
@@ -99,6 +101,7 @@
           {
             name: "Creditor",
             field: "creditor_id",
+            filter: this._creditorFilter
           },
           {
             name: "Amount",
@@ -135,6 +138,10 @@
 
       noticeClicked(notice) {
         this.$emit('didSelectNotice', notice)
+      },
+
+      _creditorFilter(row, column, value) {
+        return row.creditor.name
       }
     },
 

@@ -69,6 +69,11 @@
         default: [],
       },
 
+      perPage: {
+        type: Number,
+        default: 15
+      },
+
       uri: {
         type: String,
         required: true
@@ -129,6 +134,8 @@
           uri.addQuery("q", options.filter)
         }
 
+        uri.addQuery("per_page", this.perPage)
+
         if (this.sortedColumn && this.sortDirection) {
           uri.addQuery("sort_by", this.sortedColumn)
           uri.addQuery("sort_dir", this.sortDirection)
@@ -186,7 +193,7 @@
 
         // If the user specified a filter we should use that
         if (column.filter) {
-          value = column.filter(value)
+          value = column.filter(row, column, value)
         } else {
           // Otherwise, we should use our in-built filter
           if (column.type == "datetime") {

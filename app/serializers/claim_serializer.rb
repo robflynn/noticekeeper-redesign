@@ -19,4 +19,6 @@
 
 class ClaimSerializer < ActiveModel::Serializer
   attributes :id, :notice_id, :creditor_id, :amount, :created_at, :updated_at, :secured, :priority
+
+  belongs_to :creditor
 end
