@@ -64,15 +64,17 @@
             type: "string",
           },
           {
-            name: "Case Number",
+            name: "Case",
             field: "case_number",
             type: "string",
             subField: "case_state",
+            width: "125px"
           },
           {
             name: "Last Activity",
             field: "updated_at",
             type: "datetime",
+            width: "250px",
           }
         ]
       }

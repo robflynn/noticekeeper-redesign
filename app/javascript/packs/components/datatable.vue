@@ -42,7 +42,7 @@
 
     <tbody>
       <tr v-for="(row,i) in this.datasource" :key="i">
-        <td v-for="column in columns" :key="column.field" @click="_dataTableRowClicked($event, row)">
+        <td v-for="column in columns" :key="column.field" @click="_dataTableRowClicked($event, row)" v-bind:style="{ width: column.width, 'min-width': column.minWidth }">
           {{ renderField(row, column, column.field) }}
           <span v-if="column.subField" class="subtext">{{ renderField(row, column, column.subField) }}</span>
         </td>
@@ -260,10 +260,6 @@
     tbody {
       tr {
         border-bottom: solid 1px lighten($border-color, 5%);
-
-        td:first-child {
-          width: 100%;
-        }
 
         &:hover {
           cursor: pointer;
