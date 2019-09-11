@@ -68,6 +68,7 @@
       tmpThing="events"
       :columns="events_columns"
       :uri="notice.associated.events"
+      title="Events"
     />
   </div>
 </template>

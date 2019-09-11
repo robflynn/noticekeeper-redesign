@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :notices, only: [:index, :show] do
       resources :events, only: [:index, :show]
+      resources :documents, only: [:index, :show]
     end
 
     resources :cases, only: [:index, :show], controller: 'court_cases' do

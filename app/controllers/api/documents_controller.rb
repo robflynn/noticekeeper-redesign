@@ -21,6 +21,6 @@ class Api::DocumentsController < ApplicationController
   end
 
   def get_context
-    @context = current_user.notices.find(params[:notice_id])
+    @context = current_account.notices.find(params[:notice_id])
   end
 end

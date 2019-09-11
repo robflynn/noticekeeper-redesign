@@ -25,11 +25,11 @@ class Api::ClaimsController < ApplicationController
 
   def get_context
     if params[:case_id].present?
-      @context = current_user.cases.find(params[:case_id])
+      @context = current_account.cases.find(params[:case_id])
     else
       @per_page_limit = 15
 
-      @context = current_user
+      @context = current_account
     end
   end
 end
