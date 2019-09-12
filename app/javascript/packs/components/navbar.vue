@@ -4,25 +4,20 @@
       NK
     </div>
 
-    <div>
-      {{ $mq }}
-      </div>
-
     <ul class="navbar__menu">
       <li>
-        <router-link to="/">Cases</router-link>
+        <router-link to="/">
+          <svgicon icon="court_case" width="35" height="35" color="var(--nk-sidebar-text-color)"></svgicon>
+
+          <span>Cases</span>
+        </router-link>
       </li>
-      <li>Events</li>
-      <li>Account</li>
     </ul>
   </nav>
 </template>
 
 <style scoped lang="scss">
 .navbar {
-  $navbarHeight: 50px;
-
-  height: $navbarHeight;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -46,28 +41,32 @@
   &__menu {
     $menuPadding: 10px;
     $iconSize: 35px;
-    align-content: right;
-
-    display: flex;
-    flex-direction: column;
-
 
     li {
       display: block;
-      height: $iconSize;
-      margin: $menuPadding;
+
       color: var(--nk-sidebar-text-color);
+
       font-family: 'helvetica', sans-serif;
       font-weight: 100;
       font-size: 0.8em;
       text-align: center;
 
       a {
+        padding: $menuPadding;
         color: var(--nk-sidebar-text-color);
         text-decoration: none;
+        width: 100%;
+        height: 100%;
+        display: block;
+
+        span {
+          display: block;
+          margin-top: 8px;
+        }
 
         &.router-link-active {
-          color: red;
+          color: #fff;
         }
       }
     }
@@ -76,6 +75,8 @@
 </style>
 
 <script>
+import '../../svg/court_case';
+
 export default {
   name: "NavBar"
 };

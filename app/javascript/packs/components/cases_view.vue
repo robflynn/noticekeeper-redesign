@@ -1,7 +1,6 @@
 <template>
-  <div>
+  <div class="cases-view">
     <div class="flex row">
-      <div style="margin: 25px; width: 100%;">
       <datatable
         ref="cases_data_table"
         uri="/api/cases"
@@ -10,31 +9,14 @@
         :columns="court_cases_columns"
         :rowWasSelected="courtCaseSelected"
       />
-      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
-  .flex {
-    display: flex;
-
-    &.row {
-      flex-direction: row;
-    }
-
-    &.column {
-      flex-direction: column;
-    }
-
-    &.grow {
-      flex: 1;
-    }
-  }
-
-  .flex-grow {
-    flex: 1;
-  }
+.cases-view {
+  padding: 10px;
+}
 </style>
 
 <script>

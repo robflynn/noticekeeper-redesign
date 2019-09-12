@@ -13,6 +13,7 @@ const currencyFormatter = require('currency-formatter')
 import TurbolinksAdapter from 'vue-turbolinks'
 import Vue from 'vue/dist/vue.esm'
 import Vuex from 'vuex'
+import VueSVGIcon from 'vue-svgicon'
 import VueMq from 'vue-mq'
 import Router from 'vue-router'
 
@@ -28,6 +29,7 @@ import axios from 'axios'
 Vue.prototype.$http = axios
 Vue.prototype.$currency = currencyFormatter
 
+Vue.use(VueSVGIcon)
 Vue.use(Vuex)
 Vue.use(Router)
 

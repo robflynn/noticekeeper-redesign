@@ -1,6 +1,9 @@
 {
   "name": "morning",
   "private": true,
+  "scripts": {
+    "generate-icons": "vsvg -s ./svg -t ./app/javascript/svg"
+  },
   "dependencies": {
     "@rails/webpacker": "3.5",
     "axios": "^0.19.0",
@@ -19,6 +22,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "vue-svgicon": "^3.2.6",
     "webpack-dev-server": "^2.11.2"
   }
 }

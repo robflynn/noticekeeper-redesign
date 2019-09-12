@@ -248,17 +248,19 @@ export default {
 
 <style lang="scss">
 .datatable {
+  $border-radius: 0.5em;
+
   width: 100%;
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.05);
+  border-radius: $border-radius;
 
   table {
     $datatable--hover-bg: #ebeff7;
-    $border-radius: 0.5em;
 
     user-select: none;
 
     border-collapse: collapse;
 
-    margin: 10px;
     border-radius: $border-radius;
     border-style: hidden;
     box-shadow: 0 0 0 1px solid 1px #f0eff4;
@@ -321,6 +323,11 @@ export default {
     tbody {
       tr {
         // border-bottom: solid 1px lighten(red, 5%);
+
+        &:nth-child(odd) {
+          background: #f8f8fc;
+        }
+
 
         td {
           padding-right: 30px;
