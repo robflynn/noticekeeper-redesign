@@ -4,6 +4,10 @@
       NK
     </div>
 
+    <div>
+      {{ $mq }}
+      </div>
+
     <ul class="navbar__menu">
       <li>
         <router-link to="/">Cases</router-link>

@@ -13,6 +13,7 @@ const currencyFormatter = require('currency-formatter')
 import TurbolinksAdapter from 'vue-turbolinks'
 import Vue from 'vue/dist/vue.esm'
 import Vuex from 'vuex'
+import VueMq from 'vue-mq'
 import Router from 'vue-router'
 
 import App from '../app.vue'
@@ -29,6 +30,15 @@ Vue.prototype.$currency = currencyFormatter
 
 Vue.use(Vuex)
 Vue.use(Router)
+
+Vue.use(VueMq, {
+    breakpoints: {
+      mobile: 450,
+      tablet: 900,
+      laptop: 1250,
+      desktop: Infinity,
+    }
+  })
 
 import DataTable from './components/datatable'
 import MetadataTable from './components/metadata_table'
