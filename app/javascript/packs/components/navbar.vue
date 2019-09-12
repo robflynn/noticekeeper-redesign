@@ -11,6 +11,12 @@
 
           <span>Cases</span>
         </router-link>
+
+        <a>
+          <svgicon icon="events" width="35" height="35" color="var(--nk-sidebar-text-color)"></svgicon>
+
+          <span>Events</span>
+        </a>
       </li>
     </ul>
   </nav>
@@ -34,8 +40,9 @@
     line-height: 40px;
     text-align: center;
 
-    color: blue;
+    color: var(--nk-sidebar-background);;
     font-weight: bold;
+    font-size: 1.4em;
   }
 
   &__menu {
@@ -76,6 +83,7 @@
 
 <script>
 import '../../svg/court_case';
+import '../../svg/events';
 
 export default {
   name: "NavBar"
