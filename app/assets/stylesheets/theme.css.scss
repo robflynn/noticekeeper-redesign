@@ -2,7 +2,10 @@
 [data-theme] {
   // helpers for allowing setting csss variables in hsl
   $neutral-background: hsl(220, 2, 96);
-
+  $sidebar-background: hsl(218, 22%, 27%);
+  $sidebar-text-color: hsl(220, 16, 76);
+  $main-background: hsl(206, 54%, 97%);
+  $main-bold-color: hsl(184, 48%, 52%);
 
   // base colors
   --neutral-background: #{$neutral-background};
@@ -10,8 +13,10 @@
 
   // base styles
   --nk-background-color: var(--neutral-background);
-  --nk-navbar-color: #ccc;
+  --nk-sidebar-background-color: #{$sidebar-background};
+  --nk-sidebar-text-color: #{$sidebar-text-color};
   --nk-navbar-text-color: #444;
+  --nk-main-background-color: #{$main-background};
 }
 
 .flex {

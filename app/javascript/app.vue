@@ -3,14 +3,13 @@
     <header>
       <NavBar />
     </header>
-    <main role="main">
 
+    <main role="main">
       <router-view
         @didSelectCourtCase="didSelectCourtCase"
         @didSelectNotice="didSelectNotice"
         @didSelectDocument="didSelectDocument"
       />
-
     </main>
   </div>
 </template>
@@ -18,6 +17,27 @@
 <style lang="scss">
   body {
     background: var(--nk-background-color);
+  }
+
+  body, html, .noticekeeper {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .noticekeeper {
+    display: grid;
+    align-items: stretch;
+    grid-template-columns: 80px auto;
+
+    > header {
+      background-color: var(--nk-sidebar-background-color);
+    }
+
+    > main {
+      background: var(--nk-main-background-color);
+    }
   }
 </style>
 

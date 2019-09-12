@@ -18,42 +18,53 @@
 .navbar {
   $navbarHeight: 50px;
 
-  background: var(--nk-navbar-color);
-
   height: $navbarHeight;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
-
-  padding-left: 35px;
-  padding-right: 35px;
 
   &__brand {
     background: white;
     width: 40px;
     height: 40px;
-    margin: 4px;
+    margin: 0 auto;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+
     line-height: 40px;
     text-align: center;
+
     color: blue;
     font-weight: bold;
   }
 
   &__menu {
     $menuPadding: 10px;
+    $iconSize: 35px;
     align-content: right;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+
 
     li {
-      line-height: $navbarHeight - ($menuPadding * 2);
+      display: block;
+      height: $iconSize;
       margin: $menuPadding;
-      color: var(--nk-navbar-text-color);
+      color: var(--nk-sidebar-text-color);
+      font-family: 'helvetica', sans-serif;
+      font-weight: 100;
+      font-size: 0.8em;
+      text-align: center;
 
       a {
-        color: var(--nk-navbar-text-color);
+        color: var(--nk-sidebar-text-color);
         text-decoration: none;
+
+        &.router-link-active {
+          color: red;
+        }
       }
     }
   }
