@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="case-view">
     <section class="box">
       <h1>{{ court_case.case_number }} - {{ court_case.case_name }}</h1>
 
@@ -63,6 +63,10 @@
 
 <style lang="scss">
   @import "../../stylesheets/theme.scss";
+
+  .case-view {
+    padding: 10px;
+  }
 </style>
 
 <script>

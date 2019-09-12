@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="notice-view">
 
     <div v-if="notice.amended" class="alert alert--note">
       NOTE: This notice has been superceded by an

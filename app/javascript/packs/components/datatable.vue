@@ -7,7 +7,7 @@
             <div class="flex row">
               <span v-if="title" class="datatable__title">{{ title }}</span>
 
-              <div class="search-bar flex-grow">
+              <div v-if="this.datasource.length > 0" class="search-bar flex-grow">
                 <input
                   type="text"
                   name="q"
@@ -21,7 +21,7 @@
           </th>
         </tr>
 
-        <tr class="datatable__headers">
+        <tr v-if="this.datasource.length > 0" class="datatable__headers">
           <th
             v-for="column in columns"
             :key="column.field"
@@ -47,20 +47,27 @@
       </thead>
 
       <tbody>
-        <tr v-for="(row,i) in this.datasource" :key="i">
-          <td
-            v-for="column in columns"
-            :key="column.field"
-            @click="_dataTableRowClicked($event, row)"
-            v-bind:data-column-type="column.type"
-          >
-            {{ renderField(row, column, column.field) }}
-            <span
-              v-if="column.subField"
-              class="subtext"
-            >{{ renderField(row, column, column.subField) }}</span>
-          </td>
-        </tr>
+        <template v-if="this.datasource.length > 0">
+          <tr v-for="(row,i) in this.datasource" :key="i">
+            <td
+              v-for="column in columns"
+              :key="column.field"
+              @click="_dataTableRowClicked($event, row)"
+              v-bind:data-column-type="column.type"
+            >
+              {{ renderField(row, column, column.field) }}
+              <span
+                v-if="column.subField"
+                class="subtext"
+              >{{ renderField(row, column, column.subField) }}</span>
+            </td>
+          </tr>
+        </template>
+        <template v-else>
+          <tr>
+            <td>No items found...</td>
+          </tr>
+        </template>
       </tbody>
 
       <tfoot>
@@ -249,6 +256,7 @@ export default {
 <style lang="scss">
 .datatable {
   $border-radius: 0.5em;
+  margin-bottom: 25px;
 
   width: 100%;
   box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.05);
@@ -325,7 +333,7 @@ export default {
         // border-bottom: solid 1px lighten(red, 5%);
 
         &:nth-child(odd) {
-          background: #f8f8fc;
+          background: hsl(218, 25%, 98%);
         }
 
 
