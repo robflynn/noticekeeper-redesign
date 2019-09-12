@@ -67,7 +67,7 @@ module PaginatedResource
     end
 
     def per_page_limit
-      15
+      params[:per_page] || 15
     end
 
   end

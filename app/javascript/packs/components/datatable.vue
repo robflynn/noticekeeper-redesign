@@ -7,7 +7,7 @@
             <div class="flex row">
               <span v-if="title" class="datatable__title">{{ title }}</span>
 
-              <div v-if="this.datasource.length > 0" class="search-bar flex-grow">
+              <div class="search-bar flex-grow">
                 <input
                   type="text"
                   name="q"
@@ -354,33 +354,35 @@ export default {
         }
       }
     }
+  }
 
-    &__pagination {
-      font-size: 0.8em;
+  &__pagination {
+    font-size: 0.8em;
+  }
+
+  &__title {
+    font-size: 1.2em;
+    font-weight: 800;
+    margin-bottom: 0;
+    margin-top: 0px;
+    margin-right: 25px;
+  }
+
+  &__filter {
+    border-bottom: solid 1px #f0eff4;
+    margin-left: 50px;
+  }
+
+  &__headers {
+    .sort {
+      display: block;
+      margin-left: 15px;
     }
 
-    &__title {
-      font-size: 1.2em;
-      margin-bottom: 0;
-      margin-top: 10px;
-      margin-right: 25px;
-    }
-
-    &__filter {
-      border-bottom: solid 1px #f0eff4;
-    }
-
-    &__headers {
-      .sort {
-        display: block;
-        margin-left: 15px;
-      }
-
-      th {
-        &:hover {
-          background: red;
-          cursor: pointer;
-        }
+    th {
+      &:hover {
+        background: red;
+        cursor: pointer;
       }
     }
   }
