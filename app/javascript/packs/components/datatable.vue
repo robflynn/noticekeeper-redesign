@@ -7,7 +7,7 @@
             <div class="flex row">
               <span v-if="title" class="datatable__title">{{ title }}</span>
 
-              <div class="search-bar flex-grow" v-if="pagination.total_pages > 1">
+              <div class="search-bar flex-grow">
                 <input
                   type="text"
                   name="q"
@@ -475,11 +475,15 @@ export default {
     .sort {
       display: block;
       margin-left: 15px;
+
+      &.fa-sort-up,
+      &.fa-sort-down {
+        color: var(--nk-primary-color);
+      }
     }
 
     th {
       &:hover {
-        background: red;
         cursor: pointer;
       }
     }
