@@ -7,7 +7,7 @@
             <div class="flex row">
               <span v-if="title" class="datatable__title">{{ title }}</span>
 
-              <div class="search-bar flex-grow">
+              <div class="search-bar flex-grow" v-if="pagination.total_pages > 1">
                 <input
                   type="text"
                   name="q"
@@ -73,37 +73,28 @@
 
       <tfoot>
         <th v-bind:colspan="this.columns.length">
-          <div class="datatable__pagination" v-if="this.pagination.total_pages > 1">
-            <button v-for="button in paginationButtons()"
-                    :key="button.label"
-                    v-bind:class="button.class"
-                    v-bind:data-page="button.page"
-                    @click="_pageClicked(button.page)"
-                    role="button"
-            >
+          <div class="flex row between" v-if="pagination.total_pages > 1">
+            <div class="datatable__results-summary">
+              <template>
+                  {{ pagination.total_objects }} results, showing {{ this.paginated_range() }}
+              </template>
+            </div>
 
-                    {{ button.label }}
-            </button>
+            <!-- pagination -->
+            <div class="datatable__pagination" v-if="this.pagination.total_pages > 1">
+              <button v-for="button in paginationButtons()"
+                      :key="button.label"
+                      v-bind:class="button.class"
+                      v-bind:data-page="button.page"
+                      @click="_pageClicked(button.page)"
+                      role="button"
+              >
+
+                      {{ button.label }}
+              </button>
+            </div>
+            <!-- /pagination -->
           </div>
-          <!-- pagination -->
-          <!--
-          <div class="datatable__pagination" v-if="this.pagination.total_pages > 1">
-            Page {{ this.pagination.page }} of {{ this.pagination.total_pages }}
-            <button
-              v-bind:disabled="this.pagination.links.prev == undefined"
-              class="datatable--prev"
-              @click="_changePage($event)"
-              v-bind:data-uri="this.pagination.links.prev"
-            >Prev</button>
-            <button
-              v-bind:disabled="this.pagination.links.next == undefined"
-              class="datatable--next"
-              @click="_changePage($event)"
-              v-bind:data-uri="this.pagination.links.next"
-            >Next</button>
-          </div>
-          -->
-          <!-- end pagination -->
         </th>
       </tfoot>
     </table>
@@ -176,6 +167,13 @@ export default {
 
       this.sortedColumn = null;
       this.sortDirection = "desc";
+    },
+
+    paginated_range() {
+      let recordStart = (this.pagination.per_page * (this.pagination.page - 1)) + 1
+      let recordEnd = recordStart + this.pagination.per_page - 1
+
+      return `${recordStart} - ${recordEnd}`
     },
 
     paginationButtons() {
@@ -425,6 +423,11 @@ export default {
         }
       }
     }
+  }
+
+  &__results-summary {
+    margin-top: 20px;
+    display: block;
   }
 
   &__pagination {
