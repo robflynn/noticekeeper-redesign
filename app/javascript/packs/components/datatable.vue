@@ -12,6 +12,7 @@
                   type="text"
                   name="q"
                   ref="searchbar"
+                  v-model="filter"
                   @keyup="_searchKeyUp"
                   autocomplete="off"
                   placeholder="Type to filter..."
@@ -72,7 +73,20 @@
 
       <tfoot>
         <th v-bind:colspan="this.columns.length">
+          <div class="datatable__pagination" v-if="this.pagination.total_pages > 1">
+            <button v-for="button in paginationButtons()"
+                    :key="button.label"
+                    v-bind:class="button.class"
+                    v-bind:data-page="button.page"
+                    @click="_pageClicked(button.page)"
+                    role="button"
+            >
+
+                    {{ button.label }}
+            </button>
+          </div>
           <!-- pagination -->
+          <!--
           <div class="datatable__pagination" v-if="this.pagination.total_pages > 1">
             Page {{ this.pagination.page }} of {{ this.pagination.total_pages }}
             <button
@@ -88,6 +102,7 @@
               v-bind:data-uri="this.pagination.links.next"
             >Next</button>
           </div>
+          -->
           <!-- end pagination -->
         </th>
       </tfoot>
@@ -150,7 +165,8 @@ export default {
       datasource: [],
       pagination: {
         links: {}
-      }
+      },
+      filter: ''
     };
   },
 
@@ -162,6 +178,49 @@ export default {
       this.sortDirection = "desc";
     },
 
+    paginationButtons() {
+      let buttons = []
+      let page = this.pagination.page
+      let pages = this.pagination.total_pages
+      let look_back = 3
+
+      if (page > 1) {
+        buttons.push({ label: "<", page: page - 1, class: "datatable__pagination__prev-page datatable__pagination__button"})
+      }
+
+      let pageStart = page - look_back
+
+      for (var i = 0; i < look_back; i++) {
+        if (pageStart > 1) {
+          buttons.push({ label: pageStart , page: pageStart, class: "datatable__pagination__button" })
+        }
+
+        pageStart++;
+      }
+
+      buttons.push({ label: pageStart, class: "current-page no-style" })
+
+      pageStart = page + 1
+
+      for (var i = 0; i < look_back; i++) {
+        if (pageStart < pages) {
+          buttons.push({ label: pageStart, page: pageStart, class: "datatable__pagination__button" })
+        }
+
+        pageStart++;
+      }
+
+      if (page + look_back < pages) {
+        buttons.push({ label: "...", class: "no-style" })
+      }
+
+      if (page < pages) {
+        buttons.push({ label: ">", page: page + 1, class: "datatable__pagination__button pagination__next-page"})
+      }
+
+      return buttons
+    },
+
     loadURI(options = {}) {
       var uri = this.uri;
 
@@ -171,9 +230,15 @@ export default {
 
       uri = URI(uri);
 
-      if (typeof options.filter !== "undefined") {
-        uri.addQuery("q", options.filter);
+      if (typeof this.filter !== "undefined" && this.filter !== '') {
+        uri.addQuery("q", this.filter);
       }
+
+      let page = 1
+      if (typeof options.page !== "undefined") {
+        page = parseInt(options.page)
+      }
+      uri.addQuery("page", page)
 
       uri.addQuery("per_page", this.perPage);
 
@@ -181,6 +246,8 @@ export default {
         uri.addQuery("sort_by", this.sortedColumn);
         uri.addQuery("sort_dir", this.sortDirection);
       }
+      console.log(options)
+      console.log(uri.toString())
 
       fetch(uri)
         .then(response => {
@@ -198,6 +265,10 @@ export default {
 
     _changePage($e) {
       this.loadURI({ uri: $e.target.dataset.uri });
+    },
+
+    _pageClicked(page) {
+      this.loadURI({ page: page })
     },
 
     _dataTableRowClicked(e, row, column) {
@@ -358,6 +429,30 @@ export default {
 
   &__pagination {
     font-size: 0.8em;
+
+    &__button {
+      cursor: pointer;
+      margin: 5px;
+      border: solid 1px var(--nk-primary-color);
+      background: #444;
+      display: inline-block;
+      text-align: center;
+      color: #fff;
+      width: 35px;
+      height: 35px;
+    }
+
+    .no-style {
+      margin: 5px;
+      margin-left: 0;
+      margin-right: 0;
+      height: 10px;
+      color: #fff;
+      background: transparent;
+      height: 35px;
+      width: 35px;
+      border: solid 1px transparent;
+    }
   }
 
   &__title {

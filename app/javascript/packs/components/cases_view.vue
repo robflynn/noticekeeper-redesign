@@ -8,6 +8,7 @@
         :datasource="court_cases"
         :columns="court_cases_columns"
         :rowWasSelected="courtCaseSelected"
+        perPage=10
       />
     </div>
   </div>
