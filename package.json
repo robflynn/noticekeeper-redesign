@@ -12,7 +12,7 @@
     "pluralize": "^8.0.0",
     "sass-loader": "^7.1.0",
     "sass-resources-loader": "^2.0.0",
-    "urijs": "^1.19.1",
+    "urijs": "^1.19.6",
     "vue": "^2.5.21",
     "vue-loader": "14.2.2",
     "vue-mq": "^1.0.1",
